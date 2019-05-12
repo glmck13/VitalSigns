@@ -58,6 +58,7 @@ def vital_handler(event, context):
             pass
         query['Intent'] = "VitalIntent"
         query['User'] = userId
+        query['Key'] = os.environ.get('ALEXA_KEY')
 
         page = requests.get(os.environ.get('ALEXA_URL'), auth=(os.environ.get('ALEXA_USER'), os.environ.get('ALEXA_PASS')), params=query)
         tree = html.fromstring(page.content)
