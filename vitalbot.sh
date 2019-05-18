@@ -122,7 +122,7 @@ do
 	EraseData)
 		writeTandemRead "Are you sure you want to erase your data $Name?" "" confirm
 		if [ "$confirm" = "yes" ]; then
-			rm -f report.csv report.png
+			rm -f report.*
 			Intro="Data erased."
 		else
 			Intro="Request cancelled."
@@ -136,11 +136,13 @@ do
 		for f in $User $(find . -type l)
 		do
 			cd ../$f; . ./info.conf
-			if [ -f report.csv -a -f report.png ]; then
+			if [ -f report.csv.cpt ]; then
+				ccrypt -E Key -d report.csv; plotdata >report.png
 				report="./report.csv, ./report.png"
 				msg="Here is ${Name}'s ($Email) report.\r\rTake care,\rVital Signs"
 				sendaway.sh "$addr" "Vital Signs report for $Name" "$msg" "$report"
 				(( ++count ))
+				rm -f report.png; ccrypt -E Key -e report.csv
 			fi
 		done
 		cd ../$User; . ./info.conf
@@ -171,9 +173,13 @@ do
 			writeTandemRead "Your blood pressure is $systolic over $diastolic, your pulse is $pulse, your respiration rate is $respiration, and your temperature is $temperature.  Is that correct?" "" confirm
 		done
 
-		[ ! -f report.csv ] && print "Date,Systolic,Diastolic,Pulse,Respiration,Temperature" >report.csv
+		if [ -f report.csv.cpt ]; then
+			ccrypt -E Key -d report.csv
+		else
+			print "Date,Systolic,Diastolic,Pulse,Respiration,Temperature" >report.csv
+		fi
 		print "$(date "+%b-%d-%Y %H:%M:%S"),$systolic,$diastolic,$pulse,$respiration,$temperature" >>report.csv
-		plotdata >report.png
+		ccrypt -E Key -e report.csv
 
 		writeTandemRead "Data saved. Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
