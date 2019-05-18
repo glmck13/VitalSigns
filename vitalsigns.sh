@@ -1,7 +1,7 @@
 #!/bin/ksh
 
 umask 077
-Voice="Matthew" XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
+XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 
 PATH=$PWD:~welby/bin:$PATH
 cd ~www-data/run/vitalsigns
@@ -21,6 +21,7 @@ else
 fi
 
 Answer=$(urlencode -d "$Answer")
+Key=$(urlencode -d "$Key")
 
 [ -d "$User" ] && Subscriber=$User
 
@@ -34,10 +35,10 @@ if [ ! "$Subscriber" ]; then
 
 		CreateAccount)
 			if [ ! "$Name" ]; then
-				Prompt="${XML_A}I need your first name to create an account. Check that you've entered your name in the Alexa app, and that Vital Signs has permission to read it. Afterwards, try creating your account again. Goodbye!${XML_Z}<p>Vital Signs</p><p>True</p>"
+				Prompt="${XML_A}In order to create an account, I'd first like to know your name. Go to the home screen in your Alexa app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!${XML_Z}<p>Vital Signs</p><p>True</p>"
 
 			elif [ ! "$Email" ]; then
-				Prompt="${XML_A}I need your email address to create your account. Check that you've entered an email address in your Amazon profile, and that Vital Signs has permission to read it. Afterwards, try creating your account again. Goodbye!${XML_Z}<p>Vital Signs</p><p>True</p>"
+				Prompt="${XML_A}In order to create an account, I need access to your email address. Go to the home screen in your Alexa app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!${XML_Z}<p>Vital Signs</p><p>True</p>"
 
 			else
 				Subscriber=$User
@@ -47,8 +48,7 @@ if [ ! "$Subscriber" ]; then
 				Name="$Name"
 				Email="$Email"
 				BotScript="vitalbot.sh"
-				Voice="$Voice"
-				export Name Email BotScript Voice
+				export Name Email BotScript
 				EOF
 				chmod +x info.conf
 
