@@ -8,6 +8,9 @@ def vital_handler(event, context):
     requestType = event['request']['type']
     userId = event['session']['user']['userId']
     sysInfo = event['context']['System']
+    voice = os.environ.get('ALEXA_VOICE')
+    speakStart = '<speak><voice name="{}">'.format(voice)
+    speakStop = '</voice></speak>'
     query = {}; speech = ''; card = ''; shouldEndSession = True
 
     if requestType == "LaunchRequest":
@@ -50,15 +53,12 @@ def vital_handler(event, context):
                     query['Answer'] = intent['slots']['top']['value'] + "/" + intent['slots']['bottom']['value']
 
     if query:
-        try:
-            query['Endpoint'] = sysInfo['apiEndpoint']
-            query['Accesstoken'] = sysInfo['apiAccessToken']
-            query['Device'] = sysInfo['device']['deviceId']
-        except:
-            pass
         query['Intent'] = "VitalIntent"
+        query['Endpoint'] = sysInfo['apiEndpoint']
+        query['Accesstoken'] = sysInfo['apiAccessToken']
         query['User'] = userId
         query['Key'] = os.environ.get('ALEXA_KEY')
+        query['Voice'] = voice
 
         page = requests.get(os.environ.get('ALEXA_URL'), auth=(os.environ.get('ALEXA_USER'), os.environ.get('ALEXA_PASS')), params=query)
         tree = html.fromstring(page.content)
@@ -71,7 +71,7 @@ def vital_handler(event, context):
         except:
             card = ''; shouldEndSession = True
     else:
-        speech = "<speak>" + "Goodbye!" + "</speak>"
+        speech = speakStart + "Goodbye!" + speakStop
 
     response = {
         "version": "1.0",
@@ -83,8 +83,8 @@ def vital_handler(event, context):
             },
             "reprompt": {
                 "outputSpeech": {
-                    "type": "PlainText",
-                    "text": ""
+                    "type": "SSML",
+                    "ssml": speech
                 }
             },
             "card": {
