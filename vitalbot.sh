@@ -103,17 +103,21 @@ do
 
 	UpdateProxy)
 		ProxyList=$(proxyUtil.sh -u "$User" -f | tr '\n' '\r')
-		[ ! "$ProxyList" ] && ProxyList="None"
+		[ ! "$ProxyList" ] && ProxyList="(no proxies)"
 		sed -e "s/%NAME%/$Name/g" -e "s/%PROXYLIST%/$ProxyList/" <$PROXYEMAIL | tr '\n' '\r' >$TMPFILE
-		sendaway.sh "$Email" "Vital Signs proxy info" "$(<$TMPFILE)"
+		sendaway.sh "$Email" "Vital Signs proxy information" "$(<$TMPFILE)"
 		rm -f $TMPFILE
-		writeTandemRead "Proxy info has been sent to $Email. Is there anything else I can do for you $Name?" "" answer
+		writeTandemRead "Proxy information has been sent to $Email. Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
 
 	GetHelp)
 		[ ! "$Intro" ] && Intro=$(cat - <<-EOF
-		"Send report" will email you a file with your vital sign history, as well as a graph of the data.  You'll also receive a history file and graph for anyone who has identified you as a proxy. "Erase data" will clear out your vital sign history. "Enter data" will prompt you for your current vital signs. "Update proxy" will email you instructions for how to add or delete a proxy on your account.  Lastly, "delete account" will completely remove your Vital Signs account.
+		"Enter data" will prompt you for your current vital signs. \
+		"Erase data" will clear out your vital sign history. \
+		"Send report" will email you a file with your vital sign history, as well as a graph of the data. You'll also receive a history file and graph for anyone who has identified you as a proxy. \
+		"Update proxy" will email you instructions for how to add or delete a proxy on your account. \
+		Lastly, "delete account" will completely remove your Vital Signs account.
 		EOF
 		)
 		writeTandemRead "$Intro  How can I help you $Name?" "" answer; Intro=""
