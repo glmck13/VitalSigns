@@ -107,7 +107,7 @@ do
 		sed -e "s/%NAME%/$Name/g" -e "s/%PROXYLIST%/$ProxyList/" <$PROXYEMAIL | tr '\n' '\r' >$TMPFILE
 		sendaway.sh "$Email" "Vital Signs proxy information" "$(<$TMPFILE)"
 		rm -f $TMPFILE
-		writeTandemRead "Proxy information has been sent to $Email. Is there anything else I can do for you $Name?" "" answer
+		writeTandemRead "Proxy information has been sent to $Email. In order to update your proxies, just reply back to that email requesting to add or delete users. Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
 
