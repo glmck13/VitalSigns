@@ -91,17 +91,11 @@ def vital_handler(event, context):
         }
     }
 
-    if card == "#Name":
+    if card in ("#Name", "#Email"):
         response["response"]["card"] = {
             "type": "AskForPermissionsConsent",
             "permissions": [
-                "alexa::profile:given_name:read"
-            ]
-        }
-    elif card == "#Email":
-        response["response"]["card"] = {
-            "type": "AskForPermissionsConsent",
-            "permissions": [
+                "alexa::profile:given_name:read",
                 "alexa::profile:email:read"
             ]
         }
