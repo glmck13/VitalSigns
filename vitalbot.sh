@@ -113,11 +113,7 @@ do
 
 	GetHelp)
 		[ ! "$Intro" ] && Intro=$(cat - <<-EOF
-		"Enter data" will prompt you for your current vital signs. \
-		"Erase data" will clear out your vital sign history. \
-		"Send report" will email you a file with your vital sign history, as well as a graph of the data. You'll also receive a history file and graph for anyone who has identified you as a proxy. \
-		"Update proxy" will email you instructions for how to add or delete a proxy on your account. \
-		Lastly, "delete account" will completely remove your Vital Signs account.
+		"Enter data" will prompt you for your current vital signs. "Erase data" will clear out your vital sign history. "Send report" will email you a file with your vital sign history, as well as a graph of the data. You'll also receive a history file and graph for anyone who has identified you as a proxy. "Update proxy" will email you instructions for how to add or delete a proxy on your account. Lastly, "delete account" will completely remove your Vital Signs account.
 		EOF
 		)
 		writeTandemRead "$Intro  How can I help you $Name?" "" answer; Intro=""
