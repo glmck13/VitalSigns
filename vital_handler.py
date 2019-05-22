@@ -87,13 +87,29 @@ def vital_handler(event, context):
                     "ssml": speech
                 }
             },
-            "card": {
-                "type": "Simple",
-                "title": os.environ.get('ALEXA_CARDTITLE'),
-                "content": card
-            },
             "shouldEndSession": shouldEndSession
         }
     }
+
+    if card == "#Name":
+        response["response"]["card"] = {
+            "type": "AskForPermissionsConsent",
+            "permissions": [
+                "alexa::profile:given_name:read"
+            ]
+        }
+    elif card == "#Email":
+        response["response"]["card"] = {
+            "type": "AskForPermissionsConsent",
+            "permissions": [
+                "alexa::profile:email:read"
+            ]
+        }
+    else:
+        response["response"]["card"] = {
+            "type": "Simple",
+            "title": os.environ.get('ALEXA_CARDTITLE'),
+            "content": card
+        }
 
     return response
