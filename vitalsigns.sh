@@ -87,8 +87,8 @@ else
 				ls --full-time .confirm 2>/dev/null | read x x x x x d t x
 				(( secs = $(date +%s) - $(date --date="$d $t" +%s) ))
 				if (( secs <= 30 )); then
-					cd ..; rm -fr $Subscriber
 					proxyUtil.sh -u $Subscriber -d- 2>/dev/null
+					cd ..; rm -fr $Subscriber
 					Prompt=$(writeTandemRead "$Name, your account has been deleted. Thank you for using Vital Signs. Goodbye!" "")
 				else
 					>.confirm
