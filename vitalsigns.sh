@@ -41,7 +41,7 @@ if [ ! "$Subscriber" ]; then
 	case "$Request" in
 
 		CancelSkill)
-			Prompt=$(writeTandemRead "Goodbye!" "")
+			Prompt=$(writeTandemRead "Thanks for using Vital Signs. Goodbye!" "")
 			;;
 
 		CreateAccount)
@@ -89,7 +89,7 @@ else
 				if (( secs <= 30 )); then
 					proxyUtil.sh -u $Subscriber -d- 2>/dev/null
 					cd ..; rm -fr $Subscriber
-					Prompt=$(writeTandemRead "$Name, your account has been deleted. Thank you for using Vital Signs. Goodbye!" "")
+					Prompt=$(writeTandemRead "$Name, your account has been deleted. Thanks for using Vital Signs. Goodbye!" "")
 				else
 					>.confirm
 				fi
