@@ -151,16 +151,6 @@ do
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
 
-	LaunchRequest)
-		ls --full-time lastheard 2>/dev/null | read x x x x x d t x
-		(( secs = $(date +%s) - $(date --date="$d $t" +%s) ))
-		>lastheard
-
-		writeTandemRead "Hello $Name. You last checked in $(timeElapsed). Do you want to enter your vital signs?" "" answer
-		if [ "$answer" != "yes" ]; then Intro="OK. " Request="GetHelp"; else Intro="" Request="EnterData"; fi
-		continue
-		;;
-
 	EnterData)
 		confirm="no"
 		while [ "$confirm" != "yes" ]
@@ -184,6 +174,17 @@ do
 		writeTandemRead "Data saved. Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
+
+	*)
+		ls --full-time lastheard 2>/dev/null | read x x x x x d t x
+		(( secs = $(date +%s) - $(date --date="$d $t" +%s) ))
+		>lastheard
+
+		writeTandemRead "Hello $Name. You last checked in $(timeElapsed). Do you want to enter your vital signs?" "" answer
+		if [ "$answer" != "yes" ]; then Intro="OK. " Request="GetHelp"; else Intro="" Request="EnterData"; fi
+		continue
+		;;
+
 	esac
 done
 
