@@ -1,0 +1,135 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "vital signs",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CreateAccount",
+                    "slots": [],
+                    "samples": [
+                        "create account"
+                    ]
+                },
+                {
+                    "name": "DeleteAccount",
+                    "slots": [],
+                    "samples": [
+                        "delete account"
+                    ]
+                },
+                {
+                    "name": "EnterData",
+                    "slots": [],
+                    "samples": [
+                        "enter vital signs",
+                        "save data",
+                        "record data",
+                        "submit data",
+                        "enter data"
+                    ]
+                },
+                {
+                    "name": "EraseData",
+                    "slots": [],
+                    "samples": [
+                        "erase history",
+                        "erase vital signs",
+                        "remove data",
+                        "zero out data",
+                        "purge data",
+                        "delete data",
+                        "clear data",
+                        "erase data"
+                    ]
+                },
+                {
+                    "name": "SubmitAnswer",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "whole",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "fraction",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "top",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "bottom",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "{top} over {bottom}",
+                        "{number} degrees",
+                        "{whole} point {fraction} degrees",
+                        "{whole} point {fraction}",
+                        "{number}"
+                    ]
+                },
+                {
+                    "name": "SendReport",
+                    "slots": [],
+                    "samples": [
+                        "send history",
+                        "send vital signs",
+                        "email report",
+                        "send data",
+                        "get report",
+                        "send report"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "UpdateProxy",
+                    "slots": [],
+                    "samples": [
+                        "show proxy",
+                        "show proxies",
+                        "delete proxy",
+                        "add proxy",
+                        "update proxy info",
+                        "update proxy list",
+                        "update proxy",
+                        "update proxies"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
