@@ -50,26 +50,8 @@ writeTandemRead () {
 }
 
 plotdata () {
-	gnuplot <<-EOF
-	set term png size 900,1600
-	set datafile separator ","
-	set xdata time
-	set timefmt "%b-%d-%Y %H:%M:%S"
-	set key autotitle columnheader
-	set multiplot layout 3,1
-	set xtics timedate format "%b\n%d"
-#	set autoscale noextend
-	set style line 1 lc rgb "red" lt 1 lw 3 pt 7 pi -1 ps 1.5
-	set style line 2 lc rgb "blue" lt 1 lw 3 pt 7 pi -1 ps 1.5
-	set pointintervalbox 3
-	set title "Blood Pressure"
-	plot "report.csv" using 1:2 with linespoints ls 1, "" using 1:3 with linespoints ls 2
-	set title "Pulse + Respiration"
-	plot "" using 1:4 with linespoints ls 1, "" using 1:5 with linespoints ls 2
-	set title "Temperature"
-	plot "" using 1:6 with linespoints ls 1
-	unset multiplot
-	EOF
+	plotfile="${scriptfile%/*}/plot.txt"
+	[ -f "$plotfile" ] && gnuplot <$plotfile
 }
 
 #
@@ -77,7 +59,8 @@ plotdata () {
 #
 
 umask 077
-PROXYEMAIL=~welby/etc/proxy.txt
+CONFIG=~welby/etc
+PROXYEMAIL=$CONFIG/proxy.txt
 TMPFILE=/tmp/$$.txt
 XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 
@@ -85,11 +68,20 @@ XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 (( oneHour = oneMin*60 ))
 (( oneDay = oneHour*24 ))
 
-typeset -i systolic; systolic=0
-typeset -i diastolic; diastolic=0
-typeset -i respiration; respiration=0
-typeset -i pulse; pulse=0
-typeset -F1 temperature; temperature=0
+scriptfile="./script.txt"
+[ ! -f "$scriptfile" ] && scriptfile="$CONFIG/$scriptfile"
+n=0; while read line
+do
+	if [ ! "$header" ]; then
+		header=",$line"
+	else
+		x=$line\"\" x=${x#*\"} x=${x%%\"*}
+		label[$n]=${x:-missing label}
+		prompt[$n]="${line//\"/}"
+		(( ++n ))
+	fi
+done <$scriptfile
+signs=$n
 
 exec <>inpipe
 
@@ -138,7 +130,8 @@ do
 			cd ../$f; . ./info.conf
 			if [ -f report.csv.cpt ]; then
 				ccrypt -E Key -d report.csv; plotdata >report.png
-				report="./report.csv, ./report.png"
+				report="./report.csv"
+				[ -s report.png ] && report+=", ./report.png"
 				msg="Here is ${Name}'s ($Email) report.\r\rTake care,\rVital Signs"
 				sendaway.sh "$addr" "Vital Signs report for $Name" "$msg" "$report"
 				(( ++count ))
@@ -152,23 +145,41 @@ do
 		;;
 
 	EnterData)
-		confirm="no"
+		confirm="yes"
+		(( signs > 0 )) && confirm="no"
 		while [ "$confirm" != "yes" ]
 		do
-			writeTandemRead "What is your blood pressure?" "" pressure
-			writeTandemRead "What is your pulse, in beats per minute?" "" pulse
-			writeTandemRead "What is your respiration rate, in breaths per minute?" "" respiration
-			writeTandemRead "What is your temperature, in degrees Fahrenheit?" "" temperature
-			systolic=${pressure%/*} diastolic=${pressure#*/}
-			writeTandemRead "Your blood pressure is $systolic over $diastolic, your pulse is $pulse, your respiration rate is $respiration, and your temperature is $temperature.  Is that correct?" "" confirm
+			n=0; while (( n < signs ))
+			do
+				writeTandemRead "${prompt[$n]}" "" x
+				value[$n]=$x
+				(( ++n ))
+			done
+			rusure=""
+			n=0; while (( n < signs ))
+			do
+				x=${value[$n]} x=${x//\// over }
+				rusure+="Your ${label[$n]} is $x. "
+				(( ++n ))
+			done
+			rusure+="Is that correct?"
+			writeTandemRead "$rusure" "" confirm
 		done
 
 		if [ -f report.csv.cpt ]; then
 			ccrypt -E Key -d report.csv
 		else
-			print "Date,Systolic,Diastolic,Pulse,Respiration,Temperature" >report.csv
+			print "Date$header" >report.csv
 		fi
-		print "$(date "+%b-%d-%Y %H:%M:%S"),$systolic,$diastolic,$pulse,$respiration,$temperature" >>report.csv
+
+		line="$(date "+%b-%d-%Y %H:%M:%S")"
+		n=0; while (( n < signs ))
+		do
+			x=${value[$n]} x=${x//\//,}
+			line+=",$x"
+			(( ++n ))
+		done
+		print "$line" >>report.csv
 		ccrypt -E Key -e report.csv
 
 		writeTandemRead "Data saved. Is there anything else I can do for you $Name?" "" answer
