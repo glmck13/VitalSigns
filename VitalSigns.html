@@ -5,7 +5,7 @@
 	<title>Vital Signs</title>
 	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
 	<meta name="created" content="2019-05-13T18:28:07.359828118"/>
-	<meta name="changed" content="2019-05-21T10:37:20.195410301"/>
+	<meta name="changed" content="2019-06-02T14:00:51.602358527"/>
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
 		p { margin-bottom: 0.1in; direction: inherit; line-height: 120% }
@@ -18,6 +18,7 @@
 		h2.western { font-family: "Albany", sans-serif; font-size: 16pt }
 		h2.cjk { font-family: "Noto Sans CJK SC Regular"; font-size: 16pt }
 		h2.ctl { font-family: "Lohit Devanagari"; font-size: 16pt }
+		pre.cjk { font-family: "DejaVu Sans Mono", monospace }
 		a:link { so-language: zxx }
 	</style>
 </head>
@@ -34,7 +35,73 @@ This tool is for informational purposes only, and is not intended as
 a substitute for professional medical advice. Always seek input from
 a qualified health provider regarding any medical condition you may
 have. In case of a medical emergency, seek treatment immediately.</i></font></font></p>
-<h1 class="western"><a name="__RefHeading___Toc116_3748293789"></a><a name="__RefHeading___Toc109_562478963"></a><a name="__RefHeading___Toc109_1211803896"></a>
+<h1 class="western">What’s New!</h1>
+<p class="western" style="font-weight: normal; text-decoration: none">
+<i>June 1, 2019:</i><span style="font-style: normal">  You can now
+specify </span><span style="font-style: normal">what</span><span style="font-style: normal">
+health metrics </span><span style="font-style: normal">you’d like</span><span style="font-style: normal">
+Vital Signs </span><span style="font-style: normal">to track, </span><span style="font-style: normal">and
+you can even </span><span style="font-style: normal">make</span><span style="font-style: normal">
+your own plots too!  When you enter data into the skill, Vital Signs
+follows a “script” to prompt you for input.  Here’s the default
+script:</span></p>
+<pre class="western" style="margin-left: 0.49in">What is your &quot;blood pressure&quot;?
+What is your &quot;pulse&quot;, in beats per minute?
+What is your &quot;respiration rate&quot;, in breaths per minute?
+What is your &quot;temperature&quot;, in degrees Fahrenheit?
+#Systolic,Diastolic,Pulse,Respiration,Temperature
+</pre><p class="western" style="font-weight: normal; text-decoration: none">
+<span style="font-style: normal">You can now replace that script with
+one of your own, simply by sending an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+</span><span style="font-style: normal">and including the</span><span style="font-style: normal">
+word “script” somewhere in the subject </span><span style="font-style: normal">line</span><span style="font-style: normal">.
+ </span><span style="font-style: normal">For example, here’s </span><span style="font-style: normal">an
+email that changes </span><span style="font-style: normal">the</span><span style="font-style: normal">
+script to one that </span><span style="font-style: normal">tracks
+your </span><span style="font-style: normal">current </span><span style="font-style: normal">weight
+and </span><span style="font-style: normal">how many calories you’ve
+</span><span style="font-style: normal">recently </span><span style="font-style: normal">eaten:</span></p>
+<pre class="western" style="margin-left: 0.49in">From: <a href="mailto:Mary@xmail.com">Mary@xmail.com</a>
+To: <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+Subject: New vital signs script
+
+<span style="font-style: normal">What is your current &quot;weight&quot; in pounds?</span>
+<span style="font-style: normal">What is your </span><span style="font-style: normal">latest</span><span style="font-style: normal"> </span><span style="font-style: normal">&quot;calorie count&quot;?</span>
+</pre><p class="western">
+Vital Signs uses the words enclosed “in quotes” to build the
+confirmation message after you enter all of your data.  Those words
+are also used as the column headings in your report.csv file, unless
+you specify a header line at the end of the script starting with a
+‘#’, e.g. in the example above you might end the script with the
+line: #Pounds,Calories</p>
+<p class="western">In addition to specifying the health metrics you’d
+like Vital Signs to track, you can also design a custom plot for your
+data.  Vital Signs uses gnuplot to produce its charts.  <span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">You
+can replace the default gnuplot code in the same manner as the
+script.  Simply email a new version of the code to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>,
+but this time specify the</span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">
+word “</span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">plot</span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">”
+somewhere in the subject </span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">line</span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">.
+ </span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">For
+example, here’s </span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">an
+email that </span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">plots
+the pounds &amp; calories data collected by the script above</span></span></span><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">:</span></span></span></p>
+<pre class="western" style="margin-left: 0.49in">From: <a href="mailto:Mary@xmail.com">Mary@xmail.com</a>
+To: <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+Subject: New vital signs plot code
+
+set term png
+set datafile separator &quot;,&quot;
+set xdata time
+set timefmt &quot;%b-%d-%Y %H:%M:%S&quot;
+set key autotitle columnheader
+set xtics timedate format &quot;%b\n%d&quot;
+set style line 1 lc rgb &quot;red&quot; lt 1 lw 3 pt 7 pi -1 ps 1.5
+set style line 2 lc rgb &quot;blue&quot; lt 1 lw 3 pt 7 pi -1 ps 1.5
+set pointintervalbox 3
+set y2tics
+plot &quot;report.csv&quot; using 1:2 with linespoints ls 1, \<br/>
+&quot;&quot; using 1:3 axes x1y2 with linespoints ls 2</pre><h1 class="western">
 GETTING STARTED</h1>
 <p class="western">Vital Signs is an <a href="https://www.amazon.com/dp/B07S5KN6K6" target="_blank">Alexa
 skill</a> that maintains a history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
@@ -101,7 +168,7 @@ COMMANDS</h1>
 	remove your Vital Signs account, any data stored under the account,
 	and all of your proxy assignments.</p>
 </ul>
-<h1 class="western"><a name="PROXIES"></a><a name="__RefHeading___Toc120_3748293789"></a><a name="__RefHeading___Toc113_562478963"></a><a name="__RefHeading___Toc113_1211803896"></a>
+<h1 class="western"><a name="__RefHeading___Toc120_3748293789"></a><a name="PROXIES"></a><a name="__RefHeading___Toc113_1211803896"></a><a name="__RefHeading___Toc113_562478963"></a>
 PROXIES</h1>
 <p class="western">We’ve all been in situations where we’d like
 to know how someone is doing, but we can’t be around to check on
@@ -131,6 +198,7 @@ permission) can do this:</p>
 	will send John both his own data, as well has his mom’s.</p>
 </ol>
 <p class="western" align="left" style="margin-left: 0.49in"><img src="VitalSigns_html_4b4d89bb2854b70b.png" name="Image3" align="bottom" width="414" height="344" border="0"/>
+
 </p>
 <p class="western">There is no limit on the number of proxies a user
 can associate with his/her account. Thus, for example, if Mary had
