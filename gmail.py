@@ -22,4 +22,4 @@ fd = open(TextFile, "w")
 fd.write(text)
 fd.close()
 
-print msg["From"]
+print msg["From"] + "|" + msg["Subject"]

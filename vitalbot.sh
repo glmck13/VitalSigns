@@ -72,6 +72,8 @@ scriptfile="./script.txt"
 [ ! -f "$scriptfile" ] && scriptfile="$CONFIG/$scriptfile"
 n=0; while read line
 do
+	[ ! "$line" ] && continue
+
 	if [ ! "$header" ]; then
 		header=",$line"
 	else
