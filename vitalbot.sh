@@ -74,10 +74,10 @@ n=0; while read line
 do
 	[ ! "$line" ] && continue
 
-	if [ ! "$header" ]; then
-		header=",$line"
+	if [[ "$line" == \#* ]]; then
+		header=",${line#\#}"
 	else
-		x=$line\"\" x=${x#*\"} x=${x%%\"*}
+		x=$line\"\" x=${x#*\"} x=${x%%\"*} header+=",$x"
 		label[$n]=${x:-missing label}
 		prompt[$n]="${line//\"/}"
 		(( ++n ))
