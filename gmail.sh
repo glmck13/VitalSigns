@@ -32,6 +32,6 @@ case "$subject" in
 	;;
 
 *plot*)
-	cat $tmpFile | fileUtil.sh -m "$email" -a plot.txt
+	cat $tmpFile | fileUtil.sh -m "$email" -a plot.chk
 	;;
 esac
