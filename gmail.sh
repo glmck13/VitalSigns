@@ -2,7 +2,7 @@
 
 PATH=$PWD:~welby/bin:$PATH
 
-tmpFile=message$$.txt
+tmpFile=./message$$.txt
 trap "rm -f $tmpFile" HUP INT QUIT TERM EXIT
 
 typeset -l cmd subject
@@ -25,13 +25,19 @@ case "$subject" in
 	do
 		proxyUtil.sh -m "$email" -${cmd:0:1} "$proxy"
 	done
+	msg="Your proxy updates have been completed.  Thanks for using Vital Signs!"
+	sendaway.sh "$email" "Vital Signs confirmation" "$msg"
 	;;
 
 *script*)
 	cat $tmpFile | fileUtil.sh -m "$email" -a script.txt
+	msg="Your updated script has been installed.  Be sure to supply a corresponding plot routine. Thanks for using Vital Signs!"
+	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
 	;;
 
 *plot*)
 	cat $tmpFile | fileUtil.sh -m "$email" -a plot.chk
+	msg="Your updated plot routine is under review.  You will receive a confirmation message once it is installed. Thanks for using Vital Signs!"
+	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
 	;;
 esac
