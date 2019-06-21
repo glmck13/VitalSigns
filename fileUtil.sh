@@ -15,7 +15,7 @@ cd ~www-data/run/vitalsigns
 VITALRUN=$PWD
 
 if [ "$email" ]; then
-	find . -name "info.conf" | xargs grep -l "Email=\"$email\"" | read user
+	find . -name "info.conf" | xargs grep -il "Email=\"$email\"" | read user
 	user=${user%/*} user=${user##*/}
 fi
 
