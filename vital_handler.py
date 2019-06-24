@@ -56,6 +56,7 @@ def vital_handler(event, context):
         query['Intent'] = "VitalIntent"
         query['Endpoint'] = sysInfo['apiEndpoint']
         query['Accesstoken'] = sysInfo['apiAccessToken']
+        query['Device'] = sysInfo['device']['deviceId']
         query['User'] = userId
         query['Key'] = os.environ.get('ALEXA_KEY')
         query['Voice'] = voice
