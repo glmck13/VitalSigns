@@ -17,6 +17,10 @@ XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 PATH=$PWD:~welby/bin:$PATH
 cd ~www-data/run/vitalsigns
 
+TZ=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/devices/$Device/settings/System.timeZone)
+TZ=${TZ//\"/}
+export TZ
+
 Name=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/accounts/~current/settings/Profile.givenName)
 if [[ $Name == \{*\} ]]; then
 	Name=""
