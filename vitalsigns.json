@@ -84,14 +84,32 @@
                         {
                             "name": "bottom",
                             "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "name",
+                            "type": "AMAZON.US_FIRST_NAME"
+                        },
+                        {
+                            "name": "blank",
+                            "type": "BlankSlot"
                         }
                     ],
                     "samples": [
-                        "{top} over {bottom}",
+                        "{number} steps",
+                        "{number} kilometers",
+                        "{number} miles",
+                        "{number} grams",
+                        "{number} ounces",
+                        "{number} kilograms",
+                        "{number} pounds",
                         "{number} degrees",
                         "{whole} point {fraction} degrees",
+                        "{whole} point {fraction} pounds",
                         "{whole} point {fraction}",
-                        "{number}"
+                        "{top} over {bottom}",
+                        "{number}",
+                        "{name}",
+                        "{blank}"
                     ]
                 },
                 {
@@ -129,7 +147,25 @@
                     ]
                 }
             ],
-            "types": []
+            "types": [
+                {
+                    "name": "BlankSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "blank",
+                                "synonyms": [
+                                    "nil",
+                                    "null",
+                                    "empty",
+                                    "no value",
+                                    "skip"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     }
 }

@@ -23,21 +23,30 @@ case "$subject" in
 		grep -o -iE "add[a-z]*:[^ ]+|del[a-z]*:[^ ]+" |
 	while IFS=":," read cmd proxy
 	do
-		proxyUtil.sh -m "$email" -${cmd:0:1} "$proxy"
+		proxyUtil.sh -m "$email" -${cmd:0:1} "$proxy" >/dev/null
 	done
 	msg="Your proxy updates have been completed.  Thanks for using Vital Signs!"
 	sendaway.sh "$email" "Vital Signs confirmation" "$msg"
 	;;
 
+*data*)
+	if [ "$(fileUtil.sh -m "$email" -a report.csv <$tmpFile)" ]; then
+	msg="Your data file has been replaced.  Thanks for using Vital Signs!"
+	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	fi
+	;;
+
 *script*)
-	cat $tmpFile | fileUtil.sh -m "$email" -a script.txt
+	if [ "$(fileUtil.sh -m "$email" -a script.txt <$tmpFile)" ]; then
 	msg="Your updated script has been installed.  Be sure to supply a corresponding plot routine. Thanks for using Vital Signs!"
 	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	fi
 	;;
 
 *plot*)
-	cat $tmpFile | fileUtil.sh -m "$email" -a plot.chk
+	if [ "$(fileUtil.sh -m "$email" -a plot.chk <$tmpFile)" ]; then
 	msg="Your updated plot routine is under review.  You will receive a confirmation message once it is installed. Thanks for using Vital Signs!"
 	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	fi
 	;;
 esac

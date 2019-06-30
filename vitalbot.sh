@@ -168,17 +168,20 @@ do
 			writeTandemRead "$rusure" "" confirm
 		done
 
-		if [ -f report.csv.cpt ]; then
+		if [ -f report.csv ]; then
+			rm -f report.csv.*
+		elif [ -f report.csv.cpt ]; then
 			ccrypt -E Key -d report.csv
 		else
 			print "Date$header" >report.csv
 		fi
 
+		typeset -l y
 		line="$(date "+%b-%d-%Y %H:%M:%S")"
 		n=0; while (( n < signs ))
 		do
-			x=${value[$n]} x=${x//\//,}
-			line+=",$x"
+			y=${value[$n]} y=${y//\//,} y=${y//blank/}
+			line+=",$y"
 			(( ++n ))
 		done
 		print "$line" >>report.csv

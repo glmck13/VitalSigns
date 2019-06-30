@@ -45,6 +45,10 @@ def vital_handler(event, context):
             query['Request'] = intentName
             if not intent.has_key('slots'):
                 query['Answer'] = ""
+            elif intent['slots'].has_key('blank') and intent['slots']['blank'].has_key('value'):
+                    query['Answer'] = "blank"
+            elif intent['slots'].has_key('name') and intent['slots']['name'].has_key('value'):
+                    query['Answer'] = intent['slots']['name']['value']
             elif intent['slots'].has_key('number') and intent['slots']['number'].has_key('value'):
                     query['Answer'] = intent['slots']['number']['value']
             elif intent['slots'].has_key('whole') and intent['slots']['whole'].has_key('value') and intent['slots'].has_key('fraction') and intent['slots']['fraction'].has_key('value'):

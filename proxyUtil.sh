@@ -23,6 +23,8 @@ fi
 if [ ! "$user" ]; then print "must specify user/email account" >&2; exit; fi
 if [ ! -d "$user" ]; then print "user account not found" >&2; exit; fi
 
+print "$user"
+
 case "$cmd" in
 
 	f|l|d)

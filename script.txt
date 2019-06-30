@@ -1,5 +1,5 @@
-What is your "blood pressure"?
-What is your "pulse", in beats per minute?
-What is your "respiration rate", in breaths per minute?
 What is your "temperature", in degrees Fahrenheit?
-#Systolic,Diastolic,Pulse,Respiration,Temperature
+What is your "respiration rate", in breaths per minute?
+What is your "pulse", in beats per minute?
+What is your "blood pressure"?
+#Temperature,Respiration,Pulse,Systolic,Diastolic
