@@ -12,27 +12,13 @@ writeTandemRead () {
 }
 
 umask 077
-XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
-
 PATH=$PWD:~welby/bin:$PATH
 cd ~www-data/run/vitalsigns
 
-TZ=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/devices/$Device/settings/System.timeZone)
-TZ=${TZ//\"/}
-export TZ
-
-Name=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/accounts/~current/settings/Profile.givenName)
-if [[ $Name == \{*\} ]]; then
-	Name=""
+if [ "$Voice" ]; then
+XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 else
-	Name=${Name//\"/}
-fi
-
-Email=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/accounts/~current/settings/Profile.email)
-if [[ $Email == \{*\} ]]; then
-	Email=""
-else
-	Email=${Email//\"/}
+XML_A="<speak>" XML_Z="</speak>"
 fi
 
 Answer=$(urlencode -d "$Answer")
@@ -49,11 +35,37 @@ if [ ! "$Subscriber" ]; then
 			;;
 
 		CreateAccount)
+			if [ "$Endpoint" ]; then
+			Name=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/accounts/~current/settings/Profile.givenName)
+			if [[ $Name == \{*\} ]]; then
+				Name=""
+			else
+				Name=${Name//\"/}
+			fi
+			fi
+
+			if [ "$Endpoint" ]; then
+			Email=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/accounts/~current/settings/Profile.email)
+			if [[ $Email == \{*\} ]]; then
+				Email=""
+			else
+				Email=${Email//\"/}
+			fi
+			fi
+
+			if [ "$Device" ]; then
+			TZ=$(curl -s -H "Authorization: Bearer $Accesstoken" $(urlencode -d $Endpoint)/v2/devices/$Device/settings/System.timeZone)
+			TZ=${TZ//\"/}
+			else
+			TZ=$(timedatectl) TZ=${TZ#*zone: } TZ=${TZ%% *}
+			fi
+			export TZ
+
 			if [ ! "$Name" ]; then
-				Prompt=$(writeTandemRead "In order to create an account, I'd first like to know your name. Go to the home screen in your Alexa app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!" "#Name")
+				Prompt=$(writeTandemRead "In order to create an account, I'd first like to know your name. Go to the home screen in your app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!" "#Name")
 
 			elif [ ! "$Email" ]; then
-				Prompt=$(writeTandemRead "In order to create an account, I need access to your email address. Go to the home screen in your Alexa app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!" "#Email")
+				Prompt=$(writeTandemRead "In order to create an account, I need access to your email address. Go to the home screen in your app, and grant me the necessary permission. Afterwards, try creating your account again. Goodbye!" "#Email")
 
 			else
 				Subscriber=$User
@@ -62,8 +74,9 @@ if [ ! "$Subscriber" ]; then
 				cat - <<-EOF >info.conf
 				Name="$Name"
 				Email="$Email"
+				TZ="$TZ"
 				BotScript="vitalbot.sh"
-				export Name Email BotScript
+				export Name Email TZ BotScript
 				EOF
 				chmod +x info.conf
 
