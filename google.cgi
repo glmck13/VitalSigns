@@ -8,6 +8,7 @@ do
 	print $vars | IFS='&' read v vars
 	[ "$v" ] && export $v
 done
+export Platform="Google"
 
 print "Content-type: application/json\\n"
 
