@@ -5,7 +5,7 @@
 	<title>Vital Signs</title>
 	<meta name="generator" content="LibreOffice 6.0.7.3 (Linux)"/>
 	<meta name="created" content="2019-05-13T18:28:07.359828118"/>
-	<meta name="changed" content="2019-07-01T11:27:38.214117760"/>
+	<meta name="changed" content="2019-07-11T09:06:18.109898386"/>
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
 		p { margin-bottom: 0.1in; direction: inherit; line-height: 120% }
@@ -22,7 +22,7 @@
 		a:link { so-language: zxx }
 	</style>
 </head>
-<body lang="en-US" bgcolor="#fffbcc" dir="ltr">
+<body lang="en-US" bgcolor="#fff8dc" dir="ltr">
 <p class="western" align="center" style="margin-top: 0.17in; margin-bottom: 0.2in; line-height: 100%; page-break-after: avoid">
 <font face="Albany, sans-serif"><font size="6" style="font-size: 28pt"><b>Vital
 Signs<sup><font size="5" style="font-size: 20pt">**</font></sup> 
@@ -30,15 +30,21 @@ Signs<sup><font size="5" style="font-size: 20pt">**</font></sup>
 
 </b></font></font>
 </p>
-<p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none"><i>**Disclaimer:
-This tool is for informational purposes only, and is not intended as
-a substitute for professional medical advice. Always seek input from
-a qualified health provider regarding any medical condition you may
-have. In case of a medical emergency, seek treatment immediately.</i></p>
+<p class="western" style="font-variant: normal; font-weight: normal; text-decoration: none">
+<i>**Disclaimer: This tool is for informational purposes only, and is
+not intended as a substitute for professional medical advice. Always
+seek input from a qualified health provider regarding any medical
+condition you may have. In case of a medical emergency, seek
+treatment immediately.</i></p>
 <h1 class="western">What’s New!</h1>
+<h2 class="western">Coming Soon</h2>
+<p class="western">Vital Signs has been submitted for certification
+on the Google Assistant platform. Pending successful outcome of
+Google’s tests, you’ll soon be able to access the “action” –
+Google’s equivalent name for “skills” - on your Google devices.</p>
 <h2 class="western">July 1, 2019</h2>
 <p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
-Many thanks to all of you who are using the skill, and providing
+Many thanks to all of you who are using Vital Signs, and providing
 feedback! As a result of your feedback, the following new features
 have been added. Please keep those suggestions coming!</p>
 <ul>
@@ -48,13 +54,13 @@ have been added. Please keep those suggestions coming!</p>
 	field, or just want to leave the field blank, you can now say &quot;skip&quot;
 	when prompted for input</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">(the
-	skill also recognizes utterances such as &quot;blank&quot;, &quot;empty&quot;,
+	skill/action also recognizes utterances such as &quot;blank&quot;, &quot;empty&quot;,
 	&quot;null&quot;). No value will be populated in your report.csv
 	file for that entry.</span></span></span></span></p>
 	<li/>
 <p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">If
-	you are sharing a common Alexa device with others, you can now enter
-	a first name as an input field within a custom script in order to
+	you are sharing a common device with others, you can now enter a
+	first name as an input field within a custom script in order to
 	differentiate among lines in your history</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">file.
 	For example, you can begin the script with: What &quot;user&quot; is
@@ -73,15 +79,13 @@ have been added. Please keep those suggestions coming!</p>
 <p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
 You can now specify what health metrics you’d like Vital Signs to
 track, and you can even make your own plots too! When you enter data
-into the skill, Vital Signs follows a “script” to prompt you for
+into the skill/action, Vital Signs follows a “script” to prompt you for
 input. Here’s the default script:</p>
-<pre class="western" style="margin-left: 0.49in">
-What is your &quot;temperature&quot;, in degrees Fahrenheit?
+<pre class="western" style="margin-left: 0.49in">What is your &quot;temperature&quot;, in degrees Fahrenheit?
 What is your &quot;respiration rate&quot;, in breaths per minute?
 What is your &quot;pulse&quot;, in beats per minute?
 What is your &quot;blood pressure&quot;?
-#Temperature,Respiration,Pulse,Systolic,Diastolic
-</pre><p class="western">
+#Temperature,Respiration,Pulse,Systolic,Diastolic</pre><p class="western">
 <span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">You
 can now replace that script with one of your own, simply by sending
 an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
@@ -104,7 +108,7 @@ line: #Pounds,Calories</p>
 <p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">In
 addition to specifying the health metrics you’d like Vital Signs to
 track, you can also design a custom plot for your data. Vital Signs
-uses gnuplot to produce its charts. You can replace the default
+uses <a href="http://www.gnuplot.info/">gnuplot</a> to produce its charts. You can replace the default
 gnuplot code in the same manner as the script. Simply email a new
 version of the code to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>,
 but this time specify the word “plot” somewhere in the subject
@@ -125,25 +129,39 @@ plot &quot;report.csv&quot; using 1:2 with linespoints, \
 &quot;&quot; using 1:3 axes x1y2 with linespoints</pre><h1 class="western">
 GETTING STARTED</h1>
 <p class="western">Vital Signs is an <a href="https://www.amazon.com/dp/B07S5KN6K6" target="_blank">Alexa
-skill</a> that maintains a history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
-vital signs</a> – blood pressure, pulse, respiration rate, and body
-temperature – and emails you a file and chart of this data whenever
+skill</a> – and soon to be a Google Action – that maintains a
+history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
+vital signs</a> – body temperature, respiration rate, pulse, and blood pressure –
+and emails you a file and chart of this data whenever
 you request it. To use Vital Signs, do the following:</p>
 <ol>
 	<li/>
-<p class="western">First, <a href="https://www.wikihow.com/Add-a-Skill-to-Alexa" target="_blank">enable
-	the skill</a> on your Echo device</p>
+<p class="western">First, enable the skill/action on your
+	<a href="https://www.wikihow.com/Add-a-Skill-to-Alexa">Amazon</a>/Google
+	device</p>
 	<li/>
-<p class="western">Second, grant the skill permission to
+<p class="western">Second, grant the skill/action permission to
 	access your first name and the email address associated with your
-	Amazon account. Vital Signs uses these to communicate with you
-	during various skill interactions. To assign permissions, open the
-	Alexa app – or login to <a href="https://alexa.amazon.com/" target="_blank">alexa.amazon.com</a>
-	– then select: Skills &gt; Your Skills &gt; Vital Signs &gt;
-	Settings &gt; Manage Permissions, and turn on the requested options.</p>
+	Amazon/Google account. Vital Signs uses these to communicate with
+	you during various dialogue interactions.</p>
+</ol>
+<ul>
+	<ul>
+		<li/>
+<p class="western">For Alexa devices, open the Alexa app –
+		or login to <a href="https://alexa.amazon.com/" target="_blank">alexa.amazon.com</a>
+		– then select: Skills &gt; Your Skills &gt; Vital Signs &gt;
+		Settings &gt; Manage Permissions, and turn on the requested
+		options.</p>
+		<li/>
+<p class="western">For Google devices, the action will talk
+		you through the steps to link your account.</p>
+	</ul>
+</ul>
+<ol start="3">
 	<li/>
-<p class="western">Finally, ask Alexa to “open Vital Signs”,
-	and create your account.</p>
+<p class="western">Finally, ask Alexa/Google to “Talk to
+	Vital Signs”, and create your account.</p>
 </ol>
 <h1 class="western"><a name="__RefHeading___Toc118_3748293789"></a><a name="__RefHeading___Toc111_562478963"></a><a name="__RefHeading___Toc111_1211803896"></a>
 COMMANDS</h1>
@@ -207,7 +225,7 @@ permission) can do this:</p>
 <p class="western">Next, Mary needs to give John permission to
 	access her data, i.e. she must designate John as a proxy. To do
 	this, Mary opens Vital Signs, and tells the assistant she wants to
-	update her proxy info. The skill then sends Mary an email message
+	update her proxy info. The tool then sends Mary an email message
 	that lists her current proxies, and gives instructions for sending a
 	reply that adds (or deletes) a proxy on her account. Mary then
 	submits a reply adding John as a proxy. Afterwards, Mary can ask
@@ -215,7 +233,7 @@ permission) can do this:</p>
 	has been added to her proxy list.</p>
 	<li/>
 <p class="western">Lastly, once John has been named as Mary’s
-	proxy, then whenever he asks Vital Signs to send a report, the skill
+	proxy, then whenever he asks Vital Signs to send a report, the tool
 	will send John both his own data, as well has his mom’s.</p>
 </ol>
 <p class="western" align="left" style="margin-left: 0.49in"><img src="VitalSigns_html_4b4d89bb2854b70b.png" name="Image3" align="bottom" width="414" height="344" border="0"/>
@@ -303,7 +321,7 @@ ago. Later, I acquired an interest in medicine after being diagnosed
 with a condition called “<a href="https://en.wikipedia.org/wiki/Hereditary_nonpolyposis_colorectal_cancer" target="_blank">Lynch
 Syndrome</a>” which predisposes me to a whole assortment of
 cancers. Vital Signs is my attempt to integrate all of these diverse
-interests in the development of a modern voice assistant skill.</p>
+interests in the development of a modern voice assistant skill/action.</p>
 <p class="western">Those of us who’ve been diagnosed with any sort
 of chronic medical condition like to keep close tabs on our health,
 and stay on the lookout for early warning signs of disease. Most
@@ -328,12 +346,12 @@ well will they adhere to a regular reporting schedule? These are all
 questions that Vital Signs may help to answer.</p>
 <h1 class="western"><a name="PRIVACY_STATEMENT"></a><a name="__RefHeading___Toc119_562478963"></a><a name="__RefHeading___Toc119_1211803896"></a>
 PRIVACY STATEMENT</h1>
-<p class="western">This privacy notice applies to the Vital Signs
-Alexa skill. In general it covers:</p>
+<p class="western">This privacy notice applies to both the Vital Signs
+Alexa skill and Google action. In general it covers:</p>
 <ul>
 	<li/>
 <p class="western">What personally identifiable information
-	(PII) is collected while using the skill, how it is used, and with
+	(PII) is collected while using the skill/action, how it is used, and with
 	whom it is shared.</p>
 	<li/>
 <p class="western">The security controls in place to protect
@@ -344,9 +362,9 @@ Alexa skill. In general it covers:</p>
 <h2 class="western">Information Collection &amp; Sharing 
 </h2>
 <p class="western">Vital Signs is intended for personal use. The
-information you share with the skill – your first name, email
-address, and vital sign data – is not sold or otherwise shared with
-any commercial entity. Only you, your designated proxies, and myself
+information you share with the tool – your first name, email
+address, and vital sign data – is not sold or shared with
+any other public or private entity. Only you, your designated proxies, and myself
 (as system administrator) have access to the data.</p>
 <h2 class="western">Information Security Controls</h2>
 <p class="western">A variety of security controls have been
@@ -365,19 +383,19 @@ implemented to protect your data:</p>
 	clear text on the server, but your vital sign history file is
 	encrypted on disk using the Linux <a href="http://ccrypt.sourceforge.net/">ccrypt</a>
 	utility. The encryption key is not stored locally, but is passed to
-	the server by the Alexa skill.</p>
+	the server by the skill/action.</p>
 	<li/>
 <p class="western">Whenever your data is transmitted across a
 	network (e.g. during HTTP and SMTP sessions), it is encrypted using
 	TLS.</p>
 	<li/>
-<p class="western">The skill uses gmail to send/receive email.
+<p class="western">The tool uses gmail to send/receive email.
 	All email folders associated with the administrator account are
 	purged daily.</p>
 </ul>
 <h2 class="western">Managing Your Data</h2>
 <p class="western">If at any time you’d like to remove your
-information from the system, simply ask the skill to erase your data,
+information from the system, simply ask the skill/action to erase your data,
 which removes just your history file, or to delete your account,
 which removes everything about you: your name, email address, and
 vital sign history.</p>
@@ -391,7 +409,7 @@ app like Vital Signs, and if so, how? Thankfully, the Department of
 Health and Human services has already considered this scenario, and
 <a href="https://hipaaqsportal.hhs.gov/community-library/accounts/92/925889/Public/OCR-health-app-developer-scenarios-2-2016.pdf" target="_blank">published
 guidelines on their website</a> to assist app developers. According
-to those guidelines, the Vital Signs skill is not subject to HIPAA
+to those guidelines, Vital Signs is not subject to HIPAA
 regulations. Here’s an excerpt from the guidelines:</p>
 <p class="western" style="margin-left: 0.49in">Scenario:</p>
 <p class="western" style="margin-left: 0.98in">Consumer downloads a
@@ -409,10 +427,10 @@ associate. The consumer is using the developer’s app to help her
 manage and organize her information without any involvement of her
 health care providers.</p>
 <h1 class="western"><a name="__RefHeading___Toc128_3748293789"></a>FEEDBACK</h1>
-<p class="western">I’d appreciate your feedback on the skill. Feel
+<p class="western">I’d appreciate your feedback on the tool. Feel
 free to email me your comments at <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>.
- For those who are interested, you can also take a look at the code
-that implements the skill on my <a href="https://github.com/glmck13/VitalSigns">github
+For those who are interested, you can also take a look at the code
+that implements the skill/action on my <a href="https://github.com/glmck13/VitalSigns">github
 site</a>.</p>
 </body>
 </html>
