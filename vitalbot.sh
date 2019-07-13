@@ -197,7 +197,7 @@ do
 		>lastheard
 
 		if [ "$Platform" = "Google" ]; then
-			Intro="Welcome back $Name, it's good to hear from you again! Remember, the information provided by this action is not a substitute for advice from a medical professional. OK, you last checked in $(timeElapsed). Do you want to enter your vital signs?"
+			Intro="Welcome back $Name, it's good to hear from you again! Remember, the information provided by this action is not a substitute for advice from a medical professional. Alright, you last checked in $(timeElapsed). Do you want to enter your vital signs?"
 		else
 			Intro="Welcome back $Name, it's good to hear from you again! You last checked in $(timeElapsed). Do you want to enter your vital signs?"
 		fi
