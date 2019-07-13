@@ -86,7 +86,7 @@ if [ ! "$Subscriber" ]; then
 
 		*)
 			if [ "$Platform" = "Google" ]; then
-			Prompt=$(writeTandemRead "Welcome to Vital Signs! You can now specify what health metrics you'd like to track using this action. For the latest updates, please visit: vital signs 'dot' dyn dns 'dot' org. Also, please be aware that the information provided by this action is not a substitute for advice from a medical professional. OK, I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
+			Prompt=$(writeTandemRead "Welcome to Vital Signs! You can now specify what health metrics you'd like to track using this action. For the latest updates, please visit: vital signs 'dot' dyn dns 'dot' org. Also, please be aware that the information provided by this action is not a substitute for advice from a medical professional. Alright, I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
 			else
 			Prompt=$(writeTandemRead "Welcome to Vital Signs! You can now specify what health metrics you'd like to track using this skill. For the latest updates, please visit: vital signs '.'  dyn dns '.' org. I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
 			fi
