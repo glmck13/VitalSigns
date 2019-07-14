@@ -4,7 +4,7 @@ PATH=$PWD:~welby/bin:$PATH
 
 cd ~www-data/run/vitalsigns
 VITALRUN=$PWD
-WARNDAY=${1:-45}
+WARNDAY=${1:-30}
 GRACEDAYS=${2:-5}
 let PURGEDAY=$WARNDAY+$GRACEDAYS
 
