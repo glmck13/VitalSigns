@@ -123,6 +123,8 @@ else
 			if [ "$(fuser inpipe 2>/dev/null)" ]; then
 				print "${Answer:-?}" >inpipe
 				read Prompt <outpipe
+			else
+				Prompt=$(writeTandemRead "For tips on using Vital Signs say: 'help'. How can I help you?" "" "?")
 			fi
 			;;
 
