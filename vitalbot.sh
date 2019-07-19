@@ -6,9 +6,9 @@
 
 plural () {
 	if (( $1 == 1 )); then
-		print ${1} ${2}
+		print ${1} ${2%s}
 	else
-		print ${1} ${2}s
+		print ${1} ${2%s}s
 	fi
 }
 
@@ -18,20 +18,20 @@ typeset -i relmajor relminor
 if (( secs < $oneHour )); then
 	(( relmajor = secs / oneMin ))
 	(( relminor = secs % oneMin ))
-	print -- "$(plural $relmajor minute) \\c"
-#	(( relminor > 0 )) && print -- "and $(plural $relminor second) \\c"
+	print -- "$(plural $relmajor minutes) \\c"
+#	(( relminor > 0 )) && print -- "and $(plural $relminor seconds) \\c"
 	print "ago"
 elif (( secs < $oneDay)); then
 	(( relmajor = secs / oneHour ))
 	(( relminor = (secs % oneHour) / oneMin ))
-	print -- "$(plural $relmajor hour) \\c"
-	(( relminor > 0 )) && print -- "and $(plural $relminor minute) \\c"
+	print -- "$(plural $relmajor hours) \\c"
+	(( relminor > 0 )) && print -- "and $(plural $relminor minutes) \\c"
 	print "ago"
 else
 	(( relmajor = secs / oneDay ))
 	(( relminor = (secs % oneDay) / oneHour ))
-	print -- "$(plural $relmajor day) \\c"
-	(( relminor > 0 )) && print -- "and $(plural $relminor hour) \\c"
+	print -- "$(plural $relmajor days) \\c"
+	(( relminor > 0 )) && print -- "and $(plural $relminor hours) \\c"
 	print "ago"
 fi
 }
@@ -54,6 +54,25 @@ plotdata () {
 	[ -f "$plotfile" ] && gnuplot <$plotfile
 }
 
+stats () {
+	case "$type" in
+
+	DateTime)
+		print "The oldest date is ${min/ / at }, and the most recent is ${max/ / at }."
+		;;
+	Text)
+		freq=${freq//\"/} freq=${freq//,/, }
+		print "The most common values are: $freq."
+		;;
+	Number)
+		print "The smallest value is $min, the largest value is $max, the middle value is $median, the average is $mean, and the standard deviation is ${stdev:-0}."
+		;;
+	*)
+		print "That column contains $type data."
+		;;
+	esac
+}
+
 #
 # Script
 #
@@ -63,6 +82,7 @@ CONFIG=~welby/etc
 PROXYEMAIL=$CONFIG/proxy.txt
 TMPFILE=/tmp/$$.txt
 XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
+LANG=en_US.UTF-8; export LANG #csvkit tools
 
 (( oneMin = 60 ))
 (( oneHour = oneMin*60 ))
@@ -98,8 +118,8 @@ do
 	UpdateProxy)
 		ProxyList=$(proxyUtil.sh -u "$User" -f | tr '\n' '\r')
 		[ ! "$ProxyList" ] && ProxyList="(no proxies)"
-		sed -e "s/%NAME%/$Name/g" -e "s/%PROXYLIST%/$ProxyList/" <$PROXYEMAIL | tr '\n' '\r' >$TMPFILE
-		sendaway.sh "$Email" "Vital Signs proxy information" "$(<$TMPFILE)"
+		sed -e "s/%ASSISTANT%/$Assistant/g" -e "s/%NAME%/$Name/g" -e "s/%PROXYLIST%/$ProxyList/" <$PROXYEMAIL | tr '\n' '\r' >$TMPFILE
+		sendaway.sh "$Email" "$Assistant proxy information" "$(<$TMPFILE)"
 		rm -f $TMPFILE
 		writeTandemRead "Proxy information has been sent to $Email. In order to update your proxies, just reply back to that email requesting to add or delete users. Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
@@ -107,7 +127,7 @@ do
 
 	GetHelp)
 		[ ! "$Intro" ] && Intro=$(cat - <<-EOF
-		"Enter data" will prompt you for your current vital signs. "Erase data" will clear out your vital sign history. "Send report" will email you a file with your vital sign history, as well as a graph of the data. You'll also receive a history file and graph for anyone who has identified you as a proxy. "Update proxy" will email you instructions for how to add or delete a proxy on your account. Lastly, "delete account" will completely remove your Vital Signs account.
+		"Enter data" will prompt you for your current vital signs. "Erase data" will delete your vital sign history. "Analyze data" will provide stats on the data you've entered, while "analyze column" followed by a number will give you stats for just a single column. "Send report" will email your history file, together with a graph of the data. You'll also receive a history file and graph for anyone who has identified you as a proxy. "Update proxy" will email you instructions for how to add or delete a proxy on your account. Lastly, "delete account" will completely remove your account.
 		EOF
 		)
 		writeTandemRead "$Intro  How can I help you $Name?" "" answer; Intro=""
@@ -125,6 +145,57 @@ do
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
 
+	AnalyzeData)
+		column="$Answer"
+		if [ -f report.csv.cpt ]; then
+
+			rows=$(ccrypt -E Key -c report.csv.cpt | wc -l)
+			(( --rows ))
+
+			x=$(ccrypt -E Key -c report.csv.cpt | head -1)
+			set -A title "" ${x//,/ }
+			cols=${#title[*]}
+			(( --cols ))
+
+			if [ $rows -le 0 ]; then
+				Intro="Your vital sign data file is empty. "
+
+			elif [ ! "$column" ]; then
+				Intro="Your vital sign data file contains $(plural $rows rows) and $(plural $cols columns) of data. "
+				column=1; while (( column <= cols ))
+				do
+					writeTandemRead "$Intro Column $column is labled \"${title[$column]}\".  Do you want stats for this column?" "" answer
+					if [ "$answer" = "yes" ]; then
+						ccrypt -E Key -c report.csv.cpt |
+						in2csv -f csv --datetime-format "%b-%d-%Y %H:%M:%S" |
+						csvstat -c$column --freq-count 3 --csv |
+						csvformat -D'|' -U3 |
+						tail -1 | IFS="|" read column_id column_name type nulls unique min max sum mean median stdev len freq; Intro=$(stats)
+					else
+						Intro=""
+					fi
+					(( ++column ))
+				done
+
+			elif [ $column -ge 1 -a $column -le $cols ]; then
+				Intro="Column $column is labeled \"${title[$column]}\", and contains $(plural $rows rows) of data. "
+				ccrypt -E Key -c report.csv.cpt |
+				in2csv -f csv --datetime-format "%b-%d-%Y %H:%M:%S" |
+				csvstat -c$column --freq-count 3 --csv |
+				csvformat -D'|' -U3 |
+				tail -1 | IFS="|" read column_id column_name type nulls unique min max sum mean median stdev len freq; Intro+=$(stats)
+
+			else
+				Intro="$column is not a valid column number. Your file contains $(plural $cols columns). "
+			fi
+		else
+			Intro="You don't have any vital sign data. "
+		fi
+
+		writeTandemRead "$Intro Is there anything else I can do for you $Name?" "" answer
+		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
+		;;
+
 	SendReport)
 		addr=$Email count=0
 		for f in $User $(find . -type l)
@@ -134,14 +205,14 @@ do
 				ccrypt -E Key -d report.csv; plotdata >report.png
 				report="./report.csv"
 				[ -s report.png ] && report+=", ./report.png"
-				msg="Here is ${Name}'s ($Email) report.\r\rTake care,\rVital Signs"
-				sendaway.sh "$addr" "Vital Signs report for $Name" "$msg" "$report"
+				msg="Here is ${Name}'s ($Email) report.\r\rTake care,\r$Assistant"
+				sendaway.sh "$addr" "$Assistant report for $Name" "$msg" "$report"
 				(( ++count ))
 				rm -f report.png; ccrypt -E Key -e report.csv
 			fi
 		done
 		cd ../$User; . ./info.conf
-		Intro="$(plural $count report) sent to $Email. "
+		Intro="$(plural $count reports) sent to $Email. "
 		writeTandemRead "$Intro Is there anything else I can do for you $Name?" "" answer
 		if [ "$answer" = "yes" ]; then Intro="OK. " Request="GetHelp"; else Request=""; fi
 		;;
@@ -209,4 +280,4 @@ do
 	esac
 done
 
-writeTandemRead "Thanks for using Vital Signs. Goodbye!" ""
+writeTandemRead "Thanks for using $Assistant. Goodbye!" ""

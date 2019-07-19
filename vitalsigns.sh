@@ -15,6 +15,13 @@ umask 077
 PATH=$PWD:~welby/bin:$PATH
 cd ~www-data/run/vitalsigns
 
+if [ "$Platform" = "Google" ]; then
+	Assistant="Welby's Vital Signs"
+else
+	Assistant="Vital Signs"
+fi
+export Assistant
+
 if [ "$Voice" ]; then
 XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
 else
@@ -31,7 +38,7 @@ if [ ! "$Subscriber" ]; then
 	case "$Request" in
 
 		CancelSkill)
-			Prompt=$(writeTandemRead "Thanks for using Vital Signs. Goodbye!" "")
+			Prompt=$(writeTandemRead "Thanks for using $Assistant. Goodbye!" "")
 			;;
 
 		CreateAccount)
@@ -72,23 +79,25 @@ if [ ! "$Subscriber" ]; then
 				mkdir $Subscriber; cd $Subscriber
 				mknod inpipe p; mknod outpipe p; >firstheard; >lastheard
 				cat - <<-EOF >info.conf
+				Platform="$Platform"
+				Assistant="$Assistant"
 				Name="$Name"
 				Email="$Email"
 				TZ="$TZ"
 				BotScript="vitalbot.sh"
-				export Name Email TZ BotScript
+				export Platform Assistant Name Email TZ BotScript
 				EOF
 				chmod +x info.conf
 
-				Prompt=$(writeTandemRead "$Name, I've created an account for you, and linked it to $Email. For tips on using Vital Signs say: 'help'. How can I help you?" "" "?")
+				Prompt=$(writeTandemRead "$Name, I've created an account for you, and linked it to $Email. For tips on using $Assistant say: 'help'. How can I help you?" "" "?")
 			fi
 			;;
 
 		*)
 			if [ "$Platform" = "Google" ]; then
-			Prompt=$(writeTandemRead "Welcome to Vital Signs! You can now specify what health metrics you'd like to track using this action. For the latest updates, please visit: vital signs 'dot' dyn dns 'dot' org. Also, please be aware that the information provided by this action is not a substitute for advice from a medical professional. Alright, I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
+			Prompt=$(writeTandemRead "Welcome to $Assistant! You can now specify what health metrics you'd like to track using this action. For the latest updates, please visit: vital signs 'dot' dyn dns 'dot' org. Also, please be aware that the information provided by this action is not a substitute for advice from a medical professional. Alright, I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
 			else
-			Prompt=$(writeTandemRead "Welcome to Vital Signs! You can now specify what health metrics you'd like to track using this skill. For the latest updates, please visit: vital signs '.'  dyn dns '.' org. I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
+			Prompt=$(writeTandemRead "Welcome to $Assistant! You can now specify what health metrics you'd like to track using this skill. For the latest updates, please visit: vital signs '.'  dyn dns '.' org. I can't find an account for you on our system. If you would like one, just say: 'create account'. Otherwise say: 'cancel'. How can I help you?" "" "?")
 			fi
 			;;
 	esac
@@ -96,7 +105,7 @@ if [ ! "$Subscriber" ]; then
 else
 	cd "$Subscriber"; . ./info.conf
 
-	Prompt=$(writeTandemRead "Thanks for using Vital Signs. Goodbye!" "")
+	Prompt=$(writeTandemRead "Thanks for using $Assistant. Goodbye!" "")
 
 	case "$Request" in
 
@@ -110,7 +119,7 @@ else
 				if (( secs <= 30 )); then
 					proxyUtil.sh -u $Subscriber -d- 2>/dev/null
 					cd ..; rm -fr $Subscriber
-					Prompt=$(writeTandemRead "$Name, your account has been deleted. Thanks for using Vital Signs. Goodbye!" "")
+					Prompt=$(writeTandemRead "$Name, your account has been deleted. Thanks for using $Assistant. Goodbye!" "")
 				else
 					>.confirm
 				fi
@@ -124,7 +133,7 @@ else
 				print "${Answer:-?}" >inpipe
 				read Prompt <outpipe
 			else
-				Prompt=$(writeTandemRead "For tips on using Vital Signs say: 'help'. How can I help you?" "" "?")
+				Prompt=$(writeTandemRead "For tips on using $Assistant say: 'help'. How can I help you?" "" "?")
 			fi
 			;;
 

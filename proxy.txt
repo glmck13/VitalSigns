@@ -2,14 +2,13 @@
 
 %PROXYLIST%
 
-Proxies can request a copy of your Vital Signs report, but they cannot change the data you have saved.  Any number of proxies can be linked to your account.  You identify proxies by their email addresses.  Proxies must already have their own Vital Signs account before their account can be linked to yours.
+Proxies can request a copy of your report, but they cannot change the data you have saved.  Any number of proxies can be linked to your account.  You identify proxies by their email addresses.  Proxies must already have their own account before their account can be linked to yours.
 
-In order to assign a new proxy or remove an exiting one, simply reply to this email and enter one or more commands of the form add:email_address or delete:email_address.  For example, the lines below tell Vital Signs to delete the proxy with address email#1, and add another whose address is email#2.  Remember, these proxies must already have accounts in the system!
+In order to assign a new proxy or remove an exiting one, simply reply to this email and enter one or more commands of the form add:email_address or delete:email_address.  For example, the lines below will delete the proxy with address email#1, and add another whose address is email#2.  Remember, these proxies must already have accounts in the system!
 
 delete:email#1
 add:email#2
 
 For more assistance, see: http://vitalsigns.dyndns.org/#PROXIES
 
-I hope you find this feature helpful,
-Vital Signs Administrator
+Thanks for using %ASSISTANT%!

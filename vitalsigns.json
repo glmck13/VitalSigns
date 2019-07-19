@@ -145,6 +145,25 @@
                         "update proxy",
                         "update proxies"
                     ]
+                },
+                {
+                    "name": "AnalyzeData",
+                    "slots": [
+                        {
+                            "name": "column",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "analyze column {column}",
+                        "analyze {column}",
+                        "analyze results in column {column}",
+                        "analyze values in column {column}",
+                        "analyze data in column {column}",
+                        "analyze results",
+                        "analyze values",
+                        "analyze data"
+                    ]
                 }
             ],
             "types": [

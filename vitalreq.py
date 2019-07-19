@@ -3,6 +3,8 @@
 import sys
 import json
 
+request = ''; answer = ''; idToken = ''
+
 try:
     webhook = json.load(sys.stdin)
 except:
@@ -20,20 +22,24 @@ except:
 
 try:
     params = webhook["queryResult"]["parameters"]
-    if params["blank"]:
-        answer = params["blank"]
-    elif params["confirmation"]:
-        answer = params["confirmation"]
-    elif params["number"]:
-        answer = str(int(params["number"]))
-    elif params["float"]:
-        answer = webhook["queryResult"]["queryText"]
-    elif params["whole"] and params["fraction"]:
-        answer = str(int(params["whole"])) + "." + str(int(params["fraction"]))
-    elif params["top"] and params["bottom"]:
-        answer = str(int(params["top"])) + "/" + str(int(params["bottom"]))
-    elif params["name"]:
-        answer = params["name"]
+    if request in ("SubmitAnswer"):
+        if params["blank"]:
+            answer = params["blank"]
+        elif params["confirmation"]:
+            answer = params["confirmation"]
+        elif params["number"]:
+            answer = str(int(params["number"]))
+        elif params["float"]:
+            answer = webhook["queryResult"]["queryText"]
+        elif params["whole"] and params["fraction"]:
+            answer = str(int(params["whole"])) + "." + str(int(params["fraction"]))
+        elif params["top"] and params["bottom"]:
+            answer = str(int(params["top"])) + "/" + str(int(params["bottom"]))
+        elif params["name"]:
+            answer = params["name"]
+    elif request in ("AnalyzeData"):
+        if params["column"]:
+            answer = str(int(params["column"]))
 except:
     answer = ''
 

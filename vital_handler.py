@@ -41,6 +41,13 @@ def vital_handler(event, context):
             query['Request'] = intentName
             query['Answer'] = ""
 
+        elif intentName in ("AnalyzeData"):
+            query['Request'] = intentName
+            if not intent.has_key('slots'):
+                query['Answer'] = ""
+            elif intent['slots'].has_key('column') and intent['slots']['column'].has_key('value'):
+                    query['Answer'] = intent['slots']['column']['value']
+
         elif intentName in ("SubmitAnswer"):
             query['Request'] = intentName
             if not intent.has_key('slots'):

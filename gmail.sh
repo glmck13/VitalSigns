@@ -7,6 +7,9 @@ trap "rm -f $tmpFile" HUP INT QUIT TERM EXIT
 
 typeset -l cmd subject
 
+cd ~www-data/run/vitalsigns
+VITALRUN=$PWD
+
 cd ~/tmp; umask 077
 
 gmail.py $tmpFile | IFS='|' read email subject
@@ -25,28 +28,38 @@ case "$subject" in
 	do
 		proxyUtil.sh -m "$email" -${cmd:0:1} "$proxy" >/dev/null
 	done
-	msg="Your proxy updates have been completed.  Thanks for using Vital Signs!"
-	sendaway.sh "$email" "Vital Signs confirmation" "$msg"
+	user=$(fileUtil.sh -m "$email")
+	if [ "$user" ]; then
+	. $VITALRUN/$user/info.conf
+	msg="$Name - Your proxy updates have been completed.  Thanks for using $Assistant!"
+	sendaway.sh "$email" "$Assistant confirmation" "$msg"
+	fi
 	;;
 
 *data*)
-	if [ "$(fileUtil.sh -m "$email" -a report.csv <$tmpFile)" ]; then
-	msg="Your data file has been replaced.  Thanks for using Vital Signs!"
-	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	user=$(fileUtil.sh -m "$email" -a report.csv <$tmpFile)
+	if [ "$user" ]; then
+	. $VITALRUN/$user/info.conf
+	msg="$Name - Your data file has been replaced.  Thanks for using $Assistant!"
+	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
 	fi
 	;;
 
 *script*)
-	if [ "$(fileUtil.sh -m "$email" -a script.txt <$tmpFile)" ]; then
-	msg="Your updated script has been installed.  Be sure to supply a corresponding plot routine. Thanks for using Vital Signs!"
-	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	user=$(fileUtil.sh -m "$email" -a script.txt <$tmpFile)
+	if [ "$user" ]; then
+	. $VITALRUN/$user/info.conf
+	msg="$Name - Your updated script has been installed.  Be sure to supply a corresponding plot routine. Thanks for using $Assistant!"
+	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
 	fi
 	;;
 
 *plot*)
-	if [ "$(fileUtil.sh -m "$email" -a plot.chk <$tmpFile)" ]; then
-	msg="Your updated plot routine is under review.  You will receive a confirmation message once it is installed. Thanks for using Vital Signs!"
-	sendaway.sh "$email" "Vital Signs confirmation" "$msg" "$tmpFile"
+	user=$(fileUtil.sh -m "$email" -a plot.chk <$tmpFile)
+	if [ "$user" ]; then
+	. $VITALRUN/$user/info.conf
+	msg="$Name - Your updated plot routine is under review.  You will receive a confirmation message once it is installed. Thanks for using $Assistant!"
+	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
 	fi
 	;;
 esac
