@@ -23,22 +23,22 @@ except:
 try:
     params = webhook["queryResult"]["parameters"]
     if request in ("SubmitAnswer"):
-        if params["blank"]:
+        if params["blank"] != '':
             answer = params["blank"]
-        elif params["confirmation"]:
+        elif params["confirmation"] != '':
             answer = params["confirmation"]
-        elif params["number"]:
+        elif params["number"] != '':
             answer = str(int(params["number"]))
-        elif params["float"]:
+        elif params["float"] != '':
             answer = webhook["queryResult"]["queryText"]
-        elif params["whole"] and params["fraction"]:
+        elif params["whole"] != '' and params["fraction"] != '':
             answer = str(int(params["whole"])) + "." + str(int(params["fraction"]))
-        elif params["top"] and params["bottom"]:
+        elif params["top"] != '' and params["bottom"] != '':
             answer = str(int(params["top"])) + "/" + str(int(params["bottom"]))
-        elif params["name"]:
+        elif params["name"] != '':
             answer = params["name"]
     elif request in ("AnalyzeData"):
-        if params["column"]:
+        if params["column"] != '':
             answer = str(int(params["column"]))
 except:
     answer = ''
