@@ -31,6 +31,8 @@ try:
             answer = str(int(params["number"]))
         elif params["float"] != '':
             answer = webhook["queryResult"]["queryText"]
+            if answer.find('/') < 0:
+                answer = str(params["float"])
         elif params["whole"] != '' and params["fraction"] != '':
             answer = str(int(params["whole"])) + "." + str(int(params["fraction"]))
         elif params["top"] != '' and params["bottom"] != '':
