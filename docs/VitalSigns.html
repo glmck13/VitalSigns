@@ -5,7 +5,7 @@
 	<title>Vital Signs</title>
 	<meta name="generator" content="LibreOffice 6.2.5.2 (Linux)"/>
 	<meta name="created" content="2019-05-13T18:28:07.359828118"/>
-	<meta name="changed" content="2019-07-19T04:10:06.238084422"/>
+	<meta name="changed" content="2019-08-03T09:58:32.418450368"/>
 	<style type="text/css">
 		@page { size: 8.27in 11.69in; margin: 0.79in }
 		p { margin-bottom: 0.1in; background: transparent; direction: inherit; line-height: 120%; background: transparent }
@@ -41,23 +41,52 @@ seek input from a qualified health provider regarding any medical
 condition you may have. In case of a medical emergency, seek
 treatment immediately.</i></p>
 <h1 class="western">What’s New!</h1>
-<h2 class="western">Coming Soon</h2>
-<p class="western">Vital Signs has been submitted for certification
-on the Google Assistant platform under the name “Welby’s Vital
-Signs” (Google said the invocation “Vital Signs” by itself was
-too generic, so we’ll wait to see if the new name is acceptable!) 
-Pending successful outcome of Google’s tests, you’ll soon be able
-to access the “action” – Google’s equivalent name for Alexa
-“skills” – on your Google devices.</p>
+<h2 class="western">August 3, 2019</h2>
+<p class="western">For users who want to customize how their data is
+plotted &amp; analyzed by the skill/action, they can now specify
+webhooks (URLs) for each of these functions:</p>
+<ul>
+	<li><p class="western">The “send report” command now generates
+	plots by sending the report.csv file to a webhook.  The default
+	webhook provided by the skill continues to generate plots as
+	described below.  Users can change this default behavior by
+	specifying their own URL to process the data.  This is done by
+	sending an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+	with the word “plot” somewhere in the subject line, and then
+	listing the URL in the body of the message (note that this modifies
+	the behavior documented in the June 1<sup>st</sup> post below).  The
+	webhook should expect to receive the csv file as raw POST data (not
+	a multipart form!), and should return an image/png.  The <a href="https://github.com/glmck13/VitalSigns/blob/master/plot.cgi">default
+	webhook</a> for generating plots is posted on the Vital Signs github
+	site.</p>
+	<li><p class="western">The “analyze data” command also employs a
+	webhook to process the csv data.  The default URL can be replaced in
+	the same manner as indicated above for custom plots, i.e. by sending
+	an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+	with the word “analyze” somewhere the subject line, and entering
+	the URL in the body of the message.  The skill passes the csv file
+	to the webhook as raw POST data (not a multipart form!), and expects
+	to receive back an English description of the analysis in text/plain
+	format that will be voiced by the assistant device.  If the user
+	invokes the analyze command with a column #, that # will be passed
+	to the webhook as a “column” variable in the QUERY_STRING field.
+	 The <a href="https://github.com/glmck13/VitalSigns/blob/master/analyze.cgi">default
+	webhook</a> for analyzing csv data is posted on the Vital Signs
+	github site.</p>
+</ul>
+<h2 class="western">July 22, 2019</h2>
+<p class="western">Vital Signs is now available on the the Google
+Assistant platform under the name “<a href="https://assistant.google.com/services/a/uid/000000b41a84c96c">Welby’s
+Vital Signs</a>”.  Give it a try!</p>
 <h2 class="western">July 19, 2019</h2>
 <p class="western">Vital Signs can now compute statistics for your
 various health metrics, e.g. min value, max value, average, etc. To
 get stats for all of your data, simply ask the tool to “analyze
 data”. The tool will generate stats for each health metric
-separately. These metrics are stored under separate columns
-within your history file. To get stats for just a particular metric,
-provide the column # for that field within your history file, e.g.
-“analyze data for column two”, or simply “analyze column two”.</p>
+separately. These metrics are stored under separate columns within
+your history file. To get stats for just a particular metric, provide
+the column # for that field within your history file, e.g. “analyze
+data for column two”, or simply “analyze column two”.</p>
 <h2 class="western">July 1, 2019</h2>
 <p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
 Many thanks to all of you who are using Vital Signs, and providing
@@ -143,8 +172,8 @@ plot &quot;report.csv&quot; using 1:2 with linespoints, \
 &quot;&quot; using 1:3 axes x1y2 with linespoints</pre><h1 class="western">
 GETTING STARTED</h1>
 <p class="western">Vital Signs is an <a href="https://www.amazon.com/dp/B07S5KN6K6" target="_blank">Alexa
-skill</a> – and soon to be a Google Action – that maintains a
-history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
+skill</a> – and soon to be a <a href="https://assistant.google.com/services/a/uid/000000b41a84c96c">Google
+Action</a> – that maintains a history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
 vital signs</a> – body temperature, respiration rate, pulse, and
 blood pressure – and emails you a file and chart of this data
 whenever you request it. To use Vital Signs, do the following:</p>
@@ -183,8 +212,7 @@ COMMANDS</h1>
 	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none">“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><b>Enter
 	data”</b></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">will
-	prompt you for your current vital signs. </span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">By
-	default, these </span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">include
+	prompt you for your current vital signs. By default, these include
 	your blood pressure (expressed as </span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><i><span style="font-weight: normal">number</span></i></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">over”
 	</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><i><span style="font-weight: normal">number</span></i></span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">),
@@ -194,16 +222,16 @@ COMMANDS</h1>
 	(expressed as </span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><i><span style="font-weight: normal">number</span></i></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">point”
 	</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><i><span style="font-weight: normal">number</span></i></span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">).</span></span></span></span></p>
-	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none">“</span></span><b><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal">Analyze
-	data”</span></span></span></b><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">
-	will provide stats on the data you've entered, one health metric at
-	a time.  </span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">Stats
-	include the minimum and maximum values for the metric, the median,
-	the average, and the standard deviation. Metrics are stored under
-	separate columns within the history file. To get stats for just a
-	particular metric, provide the column # for the metric as part of
-	the utterance, e.g. “analyze data for column two”, or simply
-	“analyze column two”.</span></span></span></span></p>
+	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none">“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><b>Analyze
+	data”</b></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
+	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">will
+	provide stats on the data you've entered, one health metric at a
+	time. Stats include the minimum and maximum values for the metric,
+	the median, the average, and the standard deviation. Metrics are
+	stored under separate columns within the history file. To get stats
+	for just a particular metric, provide the column # for the metric as
+	part of the utterance, e.g. “analyze data for column two”, or
+	simply “analyze column two”.</span></span></span></span></p>
 	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none">“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><b>Send
 	report”</b></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	</span></span>will email you a file (csv format) with your vital
