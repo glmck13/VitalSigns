@@ -55,10 +55,19 @@ case "$subject" in
 	;;
 
 *plot*)
-	user=$(fileUtil.sh -m "$email" -a plot.chk <$tmpFile)
+	user=$(grep -o 'http[s]*://[^[:space:]]*' $tmpFile | fileUtil.sh -m "$email" -a plot.url)
 	if [ "$user" ]; then
 	. $VITALRUN/$user/info.conf
-	msg="$Name - Your updated plot routine is under review.  You will receive a confirmation message once it is installed. Thanks for using $Assistant!"
+	msg="$Name - Your URL has been configured. Thanks for using $Assistant!"
+	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
+	fi
+	;;
+
+*analyze*)
+	user=$(grep -o 'http[s]*://[^[:space:]]*' $tmpFile | fileUtil.sh -m "$email" -a analyze.url)
+	if [ "$user" ]; then
+	. $VITALRUN/$user/info.conf
+	msg="$Name - Your URL has been configured. Thanks for using $Assistant!"
 	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
 	fi
 	;;

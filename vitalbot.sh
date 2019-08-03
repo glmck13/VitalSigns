@@ -50,27 +50,16 @@ writeTandemRead () {
 }
 
 plotdata () {
-	plotfile="${scriptfile%/*}/plot.txt"
-	[ -f "$plotfile" ] && gnuplot <$plotfile
+	url="${scriptfile%/*}/plot.url"
+	if [ -f "$url" ]; then
+		url=$(<$url); curl -s --data-binary @- $url
+	fi
 }
 
-stats () {
-	case "$type" in
-
-	DateTime)
-		print "The oldest date is ${min/ / at }, and the most recent is ${max/ / at }."
-		;;
-	Text)
-		freq=${freq//\"/} freq=${freq//,/, }
-		print "The most common values are: $freq."
-		;;
-	Number)
-		print "The smallest value is $min, the largest value is $max, the middle value is $median, the average is $mean, and the standard deviation is ${stdev:-0}."
-		;;
-	*)
-		print "That column contains $type data."
-		;;
-	esac
+analyzedata () {
+	url="./analyze.url"
+	[ ! -f "$url" ] && url="$CONFIG/$url"
+	url=$(<$url); curl -s --data-binary @- $url?column=${1}
 }
 
 #
@@ -166,11 +155,7 @@ do
 				do
 					writeTandemRead "$Intro Column $column is labled \"${title[$column]}\".  Do you want stats for this column?" "" answer
 					if [ "$answer" = "yes" ]; then
-						ccrypt -E Key -c report.csv.cpt |
-						in2csv -f csv --datetime-format "%b-%d-%Y %H:%M:%S" |
-						csvstat -c$column --freq-count 3 --csv |
-						csvformat -D'|' -U3 |
-						tail -1 | IFS="|" read column_id column_name type nulls unique min max sum mean median stdev len freq; Intro=$(stats)
+						Intro=$(ccrypt -E Key -c report.csv.cpt | analyzedata $column)
 					else
 						Intro=""
 					fi
@@ -178,12 +163,7 @@ do
 				done
 
 			elif [ $column -ge 1 -a $column -le $cols ]; then
-				Intro="Column $column is labeled \"${title[$column]}\", and contains $(plural $rows rows) of data. "
-				ccrypt -E Key -c report.csv.cpt |
-				in2csv -f csv --datetime-format "%b-%d-%Y %H:%M:%S" |
-				csvstat -c$column --freq-count 3 --csv |
-				csvformat -D'|' -U3 |
-				tail -1 | IFS="|" read column_id column_name type nulls unique min max sum mean median stdev len freq; Intro+=$(stats)
+				Intro="Column $column is labeled \"${title[$column]}\", and contains $(plural $rows rows) of data. $(ccrypt -E Key -c report.csv.cpt | analyzedata $column) "
 
 			else
 				Intro="$column is not a valid column number. Your file contains $(plural $cols columns). "
@@ -202,7 +182,7 @@ do
 		do
 			cd ../$f; . ./info.conf
 			if [ -f report.csv.cpt ]; then
-				ccrypt -E Key -d report.csv; plotdata >report.png
+				ccrypt -E Key -d report.csv; plotdata <report.csv >report.png
 				report="./report.csv"
 				[ -s report.png ] && report+=", ./report.png"
 				msg="Here is ${Name}'s ($Email) report.\r\rTake care,\r$Assistant"
