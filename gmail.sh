@@ -49,7 +49,7 @@ case "$subject" in
 	user=$(fileUtil.sh -m "$email" -a script.txt <$tmpFile)
 	if [ "$user" ]; then
 	. $VITALRUN/$user/info.conf
-	msg="$Name - Your updated script has been installed.  Be sure to supply a corresponding plot routine. Thanks for using $Assistant!"
+	msg="$Name - Your updated script has been installed.  Thanks for using $Assistant!"
 	sendaway.sh "$email" "$Assistant confirmation" "$msg" "$tmpFile"
 	fi
 	;;
