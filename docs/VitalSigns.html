@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<title>Vital Signs</title>
-	<meta name="generator" content="LibreOffice 6.2.5.2 (Linux)"/>
+	<meta name="generator" content="LibreOffice 6.2.6.2 (Linux)"/>
 	<meta name="created" content="2019-05-13T18:28:07.359828118"/>
-	<meta name="changed" content="2019-08-03T09:58:32.418450368"/>
+	<meta name="changed" content="2019-09-20T21:04:12.276988243"/>
 	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
+		@page { size: 8.5in 11in; margin-left: 0.79in; margin-right: 0.39in; margin-top: 0.39in; margin-bottom: 0.39in }
 		p { margin-bottom: 0.1in; background: transparent; direction: inherit; line-height: 120%; background: transparent }
 		p.western { font-family: "Carlito", sans-serif; font-size: 11pt }
 		p.cjk { font-size: 10pt }
@@ -19,15 +19,11 @@
 		h2.western { font-family: "Albany", sans-serif; font-size: 16pt; font-weight: bold }
 		h2.cjk { font-family: "Noto Sans CJK SC Regular"; font-size: 16pt; font-weight: bold }
 		h2.ctl { font-family: "Lohit Devanagari"; font-size: 16pt; font-weight: bold }
-		pre { background: transparent; background: transparent }
-		pre.western { font-family: "Liberation Mono", monospace; font-size: 10pt }
-		pre.cjk { font-family: "DejaVu Sans Mono", monospace; font-size: 10pt }
-		pre.ctl { font-family: "Liberation Mono", monospace; font-size: 10pt }
 		a:link { color: #000080; so-language: zxx; text-decoration: underline }
 		a:visited { color: #800000; so-language: zxx; text-decoration: underline }
 	</style>
 </head>
-<body lang="en-US" link="#000080" vlink="#800000" bgcolor="#fff8dc" dir="ltr"><p class="western" align="center" style="margin-top: 0.17in; margin-bottom: 0.2in; line-height: 100%; page-break-after: avoid">
+<body lang="en-US" link="#000080" vlink="#800000" bgcolor="#fff8dc" dir="ltr"><p class="western" align="center" style="line-height: 100%; page-break-after: avoid">
 <font face="Albany, sans-serif"><font size="6" style="font-size: 28pt"><b>Vital
 Signs<sup><font size="5" style="font-size: 20pt">**</font></sup> 
 <img src="VitalSigns_html_470bb0d5c5e41daa.png" name="Image1" align="middle" width="150" height="150" border="0"/>
@@ -40,147 +36,31 @@ not intended as a substitute for professional medical advice. Always
 seek input from a qualified health provider regarding any medical
 condition you may have. In case of a medical emergency, seek
 treatment immediately.</i></p>
-<h1 class="western">What’s New!</h1>
-<h2 class="western">August 3, 2019</h2>
-<p class="western">For users who want to customize how their data is
-plotted &amp; analyzed by the skill/action, they can now specify
-webhooks (URLs) for each of these functions:</p>
-<ul>
-	<li><p class="western">The “send report” command now generates
-	plots by sending the report.csv file to a webhook.  The default
-	webhook provided by the skill continues to generate plots as
-	described below.  Users can change this default behavior by
-	specifying their own URL to process the data.  This is done by
-	sending an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
-	with the word “plot” somewhere in the subject line, and then
-	listing the URL in the body of the message (note that this modifies
-	the behavior documented in the June 1<sup>st</sup> post below).  The
-	webhook should expect to receive the csv file as raw POST data (not
-	a multipart form!), and should return an image/png.  The <a href="https://github.com/glmck13/VitalSigns/blob/master/plot.cgi">default
-	webhook</a> for generating plots is posted on the Vital Signs github
-	site.</p>
-	<li><p class="western">The “analyze data” command also employs a
-	webhook to process the csv data.  The default URL can be replaced in
-	the same manner as indicated above for custom plots, i.e. by sending
-	an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
-	with the word “analyze” somewhere the subject line, and entering
-	the URL in the body of the message.  The skill passes the csv file
-	to the webhook as raw POST data (not a multipart form!), and expects
-	to receive back an English description of the analysis in text/plain
-	format that will be voiced by the assistant device.  If the user
-	invokes the analyze command with a column #, that # will be passed
-	to the webhook as a “column” variable in the QUERY_STRING field.
-	 The <a href="https://github.com/glmck13/VitalSigns/blob/master/analyze.cgi">default
-	webhook</a> for analyzing csv data is posted on the Vital Signs
-	github site.</p>
-</ul>
-<h2 class="western">July 22, 2019</h2>
-<p class="western">Vital Signs is now available on the the Google
-Assistant platform under the name “<a href="https://assistant.google.com/services/a/uid/000000b41a84c96c">Welby’s
-Vital Signs</a>”.  Give it a try!</p>
-<h2 class="western">July 19, 2019</h2>
-<p class="western">Vital Signs can now compute statistics for your
-various health metrics, e.g. min value, max value, average, etc. To
-get stats for all of your data, simply ask the tool to “analyze
-data”. The tool will generate stats for each health metric
-separately. These metrics are stored under separate columns within
-your history file. To get stats for just a particular metric, provide
-the column # for that field within your history file, e.g. “analyze
-data for column two”, or simply “analyze column two”.</p>
-<h2 class="western">July 1, 2019</h2>
-<p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
-Many thanks to all of you who are using Vital Signs, and providing
-feedback! As a result of your feedback, the following new features
-have been added. Please keep those suggestions coming!</p>
-<ul>
-	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">In
-	cases when you don’t know what value to enter in a particular
-	field, or just want to leave the field blank, you can now say &quot;skip&quot;
-	when prompted for input</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
-	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">(the
-	skill/action also recognizes utterances such as &quot;blank&quot;,
-	&quot;empty&quot;, &quot;null&quot;). No value will be populated in
-	your report.csv file for that entry.</span></span></span></span></p>
-	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">If
-	you are sharing a common device with others, you can now enter a
-	first name as an input field within a custom script in order to
-	differentiate among lines in your history</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
-	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">file.
-	For example, you can begin the script with: What &quot;user&quot; is
-	this for?</span></span></span></span></p>
-	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">Lastly,
-	you can now upload an arbitrary results file to replace the version</span></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
-	</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">that's
-	currently stored in your account. You do this the same way as
-	uploading a new script or plot routine, i.e. just send an email to
-	<a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a> where
-	&quot;data&quot; appears somewhere in the subject line, and the body
-	of the email contains the new csv contents.</span></span></span></span></p>
-</ul>
-<h2 class="western">June 1, 2019</h2>
-<p class="western" style="font-variant: normal; font-style: normal; font-weight: normal; text-decoration: none">
-You can now specify what health metrics you’d like Vital Signs to
-track, and you can even make your own plots too! When you enter data
-into the skill/action, Vital Signs follows a “script” to prompt
-you for input. Here’s the default script:</p>
-<pre class="western" style="margin-left: 0.49in">What is your &quot;temperature&quot;, in degrees Fahrenheit?
-What is your &quot;respiration rate&quot;, in breaths per minute?
-What is your &quot;pulse&quot;, in beats per minute?
-What is your &quot;blood pressure&quot;?
-#Temperature,Respiration,Pulse,Systolic,Diastolic</pre><p class="western">
-<span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">You
-can now replace that script with one of your own, simply by sending
-an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
-and including the word “script” somewhere in the subject line.
-For example, here’s an email that changes the script to one that
-tracks your current weight and how many calories you’ve recently
-eaten:</span></span></span></span></p>
-<pre class="western" style="margin-left: 0.49in">From: <a href="mailto:Mary@xmail.com">Mary@xmail.com</a>
-To: <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
-Subject: New vital signs script
-
-What is your current &quot;weight&quot; in pounds?
-<span style="font-variant: normal"><span style="font-style: normal">What is your latest</span></span><span style="font-variant: normal"> </span><span style="font-variant: normal"><span style="font-style: normal">&quot;calorie count&quot;?</span></span></pre><p class="western">
-Vital Signs uses the words enclosed “in quotes” to build the
-confirmation message after you enter all of your data. Those words
-are also used as the column headings in your report.csv file, unless
-you specify a header line at the end of the script starting with a
-‘#’, e.g. in the example above you might end the script with the
-line: #Pounds,Calories</p>
-<p class="western"><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><span style="font-weight: normal">In
-addition to specifying the health metrics you’d like Vital Signs to
-track, you can also design a custom plot for your data. Vital Signs
-uses <a href="http://www.gnuplot.info/">gnuplot</a> to produce its
-charts. You can replace the default gnuplot code in the same manner
-as the script. Simply email a new version of the code to
-<a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>, but this
-time specify the word “plot” somewhere in the subject line. For
-example, here’s an email that plots the pounds &amp; calories data
-collected by the script above:</span></span></span></span></p>
-<pre class="western" style="margin-left: 0.49in">From: <a href="mailto:Mary@xmail.com">Mary@xmail.com</a>
-To: <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
-Subject: New vital signs plot code
-
-set term png
-set datafile separator &quot;,&quot;
-set xdata time
-set timefmt &quot;%b-%d-%Y %H:%M:%S&quot;
-set xtics timedate format &quot;%b\n%d&quot;
-set y2tics
-set key autotitle columnheader
-plot &quot;report.csv&quot; using 1:2 with linespoints, \
-&quot;&quot; using 1:3 axes x1y2 with linespoints</pre><h1 class="western">
-GETTING STARTED</h1>
-<p class="western">Vital Signs is an <a href="https://www.amazon.com/dp/B07S5KN6K6" target="_blank">Alexa
-skill</a> – and soon to be a <a href="https://assistant.google.com/services/a/uid/000000b41a84c96c">Google
-Action</a> – that maintains a history of your <a href="https://en.wikipedia.org/wiki/Vital_signs" target="_blank">primary
-vital signs</a> – body temperature, respiration rate, pulse, and
-blood pressure – and emails you a file and chart of this data
-whenever you request it. To use Vital Signs, do the following:</p>
+<p class="western">Vital Signs (a.k.a. “Welby’s” Vital Signs on
+Google) is a voice assistant app currently available on both the
+<a href="https://www.amazon.com/dp/B07S5KN6K6">Alexa</a> and <a href="https://assistant.google.com/services/a/uid/000000b41a84c96c">Google</a>
+platforms that assists users in collecting, analyzing, and sharing
+health metrics with caregivers. I was inspired to develop the app
+during my participation in the “<a href="https://www.pcori.org/research-results/2018/patients-assigned-research-teams-nurses-and-er-providers-enhance-diagnosis">PARTNERED</a>”
+research project at Johns Hopkins, which just recently concluded.
+Vital Signs enables patients like myself to track our <a href="https://www.healthit.gov/topic/scientific-initiatives/patient-generated-health-data">PGHD</a>
+(Patient Generated Health Data), have the data analyzed by smart
+“bots”, and share results with caregivers.</p>
+<p class="western">Vital Signs is designed to be customizable, so
+that it can be easily adapted to different use cases. By default,
+Vital Signs records the four primary vital signs: body temperature,
+respiration rate, pulse, and blood pressure, but the app can be
+modified to collect any set of health metrics simply by emailing
+welbydx@gmail.com a new voice script that specifies what data to
+collect. In the same fashion, the app can be tailored with
+user-defined “webhooks” to integrate custom techniques for
+analyzing and plotting the data.</p>
+<h1 class="western">GETTING STARTED</h1>
+<p class="western">To get started with Vital Signs, do the following:</p>
 <ol>
-	<li><p class="western">First, enable the skill/action on your
-	<a href="https://www.wikihow.com/Add-a-Skill-to-Alexa">Amazon</a>/Google
-	device</p>
+	<li><p class="western">First, for Amazon devices, <a href="https://www.wikihow.com/Add-a-Skill-to-Alexa">follow
+	these instructions to enable the skill</a> (there’s no need to do
+	this on Google)</p>
 	<li><p class="western">Second, grant the skill/action permission to
 	access your first name and the email address associated with your
 	Amazon/Google account. Vital Signs uses these to communicate with
@@ -198,8 +78,8 @@ whenever you request it. To use Vital Signs, do the following:</p>
 	</ul>
 </ul>
 <ol start="3">
-	<li><p class="western">Finally, ask Alexa/Google to “Talk to Vital
-	Signs”, and create your account.</p>
+	<li><p class="western">Finally, ask Alexa/Google to “Talk to
+	(Welby’s) Vital Signs”, and create your account.</p>
 </ol>
 <h1 class="western"><a name="__RefHeading___Toc118_3748293789"></a><a name="__RefHeading___Toc111_562478963"></a><a name="__RefHeading___Toc111_1211803896"></a>
 COMMANDS</h1>
@@ -235,11 +115,10 @@ COMMANDS</h1>
 	<li><p class="western"><span style="font-variant: normal"><span style="text-decoration: none">“</span></span><span style="font-variant: normal"><span style="text-decoration: none"><span style="font-style: normal"><b>Send
 	report”</b></span></span></span><span style="font-variant: normal"><span style="text-decoration: none">
 	</span></span>will email you a file (csv format) with your vital
-	sign history, as well as a graph of the data. Samples of each of
-	these are provided below. In addition to your own data, you’ll
-	also receive the vital sign history file and graph for any user who
-	has identified you as their proxy. See below for more information
-	about proxies.</p>
+	sign history, as well as a graph of the data.  In addition to your own
+	data, you’ll also receive the vital sign history file and graph for
+	any user who has identified you as their proxy. See below for more
+	information about proxies.</p>
 	<li><p class="western">“<b>Erase data”</b> will clear out your
 	entire vital sign history.</p>
 	<li><p class="western">“<b>Update proxies</b>” will email you
@@ -253,10 +132,12 @@ COMMANDS</h1>
 PROXIES</h1>
 <p class="western">We’ve all been in situations where we’d like
 to know how someone is doing, but we can’t be around to check on
-them. The Vital Signs proxy feature is meant to handle this. Let’s
+them. The Vital Signs proxy feature is designed to handle this. Let’s
 say Mary is currently a Vital Signs user, and John – Mary’s son –
 would like to access Mary’s data. Here’s how John (with Mary’s
 permission) can do this:</p>
+<p class="western" align="left" style="margin-left: 0.5in"><img src="VitalSigns_html_4b4d89bb2854b70b.png" name="Image2" align="middle" width="433" height="347" border="0"/>
+</p>
 <ol>
 	<li><p class="western">First, John needs to create his own Vital
 	Signs account. John may not be interested in recording/tracking his
@@ -275,9 +156,6 @@ permission) can do this:</p>
 	proxy, then whenever he asks Vital Signs to send a report, the tool
 	will send John both his own data, as well has his mom’s.</p>
 </ol>
-<p class="western" align="left" style="margin-left: 0.49in"><img src="VitalSigns_html_4b4d89bb2854b70b.png" name="Image3" align="bottom" width="414" height="344" border="0"/>
-
-</p>
 <p class="western">There is no limit on the number of proxies a user
 can associate with his/her account. Thus, for example, if Mary had
 other children she could make all of them proxies. Similarly, there
@@ -285,105 +163,72 @@ is no restriction on the number of times a single user can be named
 as a proxy for someone else. So, for example, if John also wants to
 keep tabs on his dad, Jim, then Jim can also name John as a proxy on
 his (Jim’s) account.</p>
-<h1 class="western"><a name="__RefHeading___Toc122_3748293789"></a><a name="__RefHeading___Toc115_562478963"></a><a name="__RefHeading___Toc115_1211803896"></a>
-SAMPLE REPORTS</h1>
-<p class="western">Here are examples of the Vital Signs history file
-(report.csv) and graph (report.png):</p>
-<p class="western"><b>report.csv:</b></p>
-<p class="western" style="margin-left: 0.49in"><font face="TlwgTypewriter, monospace"><font size="1" style="font-size: 8pt">Date,Systolic,Diastolic,Pulse,Respiration,Temperature
-<br/>
-Apr-01-2019 00:00:00,112,87,53,21,98.2<br/>
-Apr-02-2019
-04:00:00,122,95,49,23,98.1 <br/>
-Apr-03-2019 11:00:00,105,87,41,24,98
-<br/>
-Apr-04-2019 12:00:00,129,91,48,29,97.4 <br/>
-Apr-05-2019
-16:00:00,114,90,43,28,99.6<br/>
-Apr-06-2019
-20:00:00,103,91,39,25,100.5<br/>
-Apr-07-2019
-04:00:00,107,92,45,28,98.9<br/>
-Apr-08-2019
-08:00:00,129,86,50,26,98.8<br/>
-Apr-09-2019
-12:00:00,106,86,48,21,99.1<br/>
-Apr-10-2019
-16:00:00,138,97,58,25,100.4<br/>
-Apr-11-2019
-19:00:00,129,95,53,25,98<br/>
-Apr-12-2019
-23:00:00,107,94,42,23,98<br/>
-Apr-13-2019
-00:00:00,103,94,40,20,99<br/>
-Apr-14-2019
-03:00:00,110,93,38,25,98<br/>
-Apr-15-2019
-08:00:00,124,94,46,23,98.8<br/>
-Apr-16-2019
-12:00:00,126,101,53,28,99<br/>
-Apr-17-2019
-16:00:00,141,106,58,27,99.3<br/>
-Apr-18-2019
-20:00:00,111,104,50,26,98.6<br/>
-Apr-19-2019
-00:00:00,110,100,48,24,97.7<br/>
-Apr-20-2019
-04:00:00,105,91,41,22,99.2 <br/>
-Apr-21-2019
-08:00:00,102,92,42,25,97.6 <br/>
-Apr-22-2019
-12:00:00,102,97,45,24,97<br/>
-Apr-23-2019
-20:00:00,103,94,42,25,98.7<br/>
-Apr-24-2019 00:00:00,95,77,52,22,99.3
-<br/>
-Apr-25-2019 04:00:00,105,95,45,23,97.5 <br/>
-Apr-26-2019
-12:00:00,119,92,49,25,98.8 <br/>
-Apr-27-2019
-16:00:00,122,94,69,18,97.8<br/>
-Apr-28-2019 20:00:00,130,97,70,24,98
-<br/>
-Apr-29-2019 04:00:00,109,99,56,24,98 <br/>
-Apr-30-2019
-08:00:00,122,96,52,24,98.2</font></font></p>
-<p class="western"><b>report.png:</b></p>
-<p class="western" style="margin-left: 0.49in"><br/>
-<img src="VitalSigns_html_5520cc3a6293ef10.png" name="Image2" align="bottom" width="491" height="873" border="0"/>
-
-</p>
-<h1 class="western">BACKGROUND</h1>
-<p class="western">I’ve been interested in math and computer
-science ever since earning degrees in these fields almost 40 years
-ago. Later, I acquired an interest in medicine after being diagnosed
-with a condition called “<a href="https://en.wikipedia.org/wiki/Hereditary_nonpolyposis_colorectal_cancer" target="_blank">Lynch
-Syndrome</a>” which predisposes me to a whole assortment of
-cancers. Vital Signs is my attempt to integrate all of these diverse
-interests in the development of a modern voice assistant
-skill/action.</p>
-<p class="western">Those of us who’ve been diagnosed with any sort
-of chronic medical condition like to keep close tabs on our health,
-and stay on the lookout for early warning signs of disease. Most
-diagnostic tests require a doctor’s prescription, so they’re not
-directly accessible to patients. Hence, patients like myself try to
-make best use of tests and data that <i>is</i> within our reach. This
-data is generally termed “<a href="https://www.healthit.gov/topic/scientific-initiatives/patient-generated-health-data" target="_blank">Patient-Generated
-Health Data (PGHD)</a>”. Unfortunately, health metrics that are
-readily available to patients oftentimes aren’t the most sensitive
-or specific indicators of complex disease. It is my hope and belief,
-however, that <a href="https://www.healthit.gov/buzz-blog/interoperability/hype-reality-artificial-intelligence-ai-transform-health-healthcare" target="_blank">advances
-in artificial intelligence/machine learning</a> (AI/ML) may start to
-change this, as new insights are gleaned from data that had
-previously been under analyzed. 
-</p>
-<p class="western">Not everyone may share my enthusiasm for tracking
-health data. What portion of the population are interested in
-collecting and recording their health data? What are the best metrics
-to collect? Is voice assistant technology the right platform for
-this? If people do embrace voice assistants for this purpose, how
-well will they adhere to a regular reporting schedule? These are all
-questions that Vital Signs may help to answer.</p>
+<h1 class="western">CUSTOMIZING The APP</h1>
+<p class="western">When you enter data into Vital Signs, the tool
+follows a script to prompt for input. Here’s the default script:</p>
+<p class="western" style="margin-left: 0.79in">What is your
+&quot;temperature&quot;, in degrees Fahrenheit?<br/>
+What is your
+&quot;respiration rate&quot;, in breaths per minute?<br/>
+What is
+your &quot;pulse&quot;, in beats per minute?<br/>
+What is your &quot;blood
+pressure&quot;?<br/>
+#Temperature,Respiration,Pulse,Systolic,Diastolic</p>
+<p class="western">Vital Signs uses the words enclosed “in quotes”
+to build the confirmation message after you enter all of your data.
+Those words are also used as the column headings in your report.csv
+file, unless you supply a specific header line (beginning with “#”)
+at the end of the script.</p>
+<p class="western">In order to replace the default script with one of
+your own, simply send an email to <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>
+with the word “script” somewhere in the subject line. For
+example, here’s an email that changes the script to one that tracks
+your current weight and how many calories you’ve eaten:</p>
+<p class="western" style="margin-left: 0.79in">From:
+<a href="mailto:Mary@xmail.com">Mary@xmail.com</a><br/>
+To:
+<a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a><br/>
+Subject:
+New vital signs script</p>
+<p class="western" style="margin-left: 0.79in">What is your &quot;weight&quot;,
+in pounds?<br/>
+How many “calories” have you consumed?</p>
+<p class="western">Data values can be numbers (with or without
+decimals), names, or yes/no responses. When appropriate, a data value
+can be left blank by responding “skip”, “blank”, “empty”,
+or “null” when prompted for input.</p>
+<p class="western">For users who want to customize how their data is
+plotted &amp; analyzed, they can specify their own webhooks (URLs)
+for each of these functions.  The “send report” command generates
+plots by submitting the user’s report.csv data to a webhook. The
+app passes the csv file as raw HTTP POST data (not a multipart
+form!), and expects an image/png in return. The default webhook for
+generating plots is posted on the
+<a href="https://github.com/glmck13/VitalSigns/blob/master/plot.cgi">
+Vital Signs github site</a>.
+Users can replace the default webhook with one
+of their own simply by sending an email to welbydx@gmail.com with the
+word “plot” somewhere in the subject line, and then including the
+webhook URL in the body of the message.  The “analyze data”
+command also employs a webhook to process the csv data. The default
+URL can be replaced in the same manner as indicated above for custom
+plots, i.e. by sending an email to welbydx@gmail.com with the word
+“analyze” somewhere the subject line, and entering the URL in the
+body of the message. The app passes the csv file as raw HTTP POST data
+(not a multipart form!), and expects English text in return. The text should
+be a description of the analysis in text/plain format that will be
+voiced by the assistant device. If the user invokes the analyze
+command with a column #, that # will be passed to the webhook as a
+“column” variable in the QUERY_STRING field. The default webhook
+for analyzing csv data is posted on the
+<a href="https://github.com/glmck13/VitalSigns/blob/master/analyze.cgi">
+Vital Signs github site</a>.</p>
+<p class="western">Lastly, in some cases a user might want to replace
+the csv file that’s stored under their system account with a
+different version. This can be done by sending an email to
+welbydx@gmail.com with the word “data” somewhere in the subject
+line, and the new csv contents in the body of the message.</p>
 <h1 class="western"><a name="PRIVACY_STATEMENT"></a><a name="__RefHeading___Toc119_562478963"></a><a name="__RefHeading___Toc119_1211803896"></a>
 PRIVACY STATEMENT</h1>
 <p class="western">This privacy notice applies to both the Vital
@@ -458,10 +303,10 @@ associate. The consumer is using the developer’s app to help her
 manage and organize her information without any involvement of her
 health care providers.</p>
 <h1 class="western"><a name="__RefHeading___Toc128_3748293789"></a>FEEDBACK</h1>
-<p class="western">I’d appreciate your feedback on the tool. Feel
+<p class="western">I’d very much welcome feedback on the tool. Feel
 free to email me your comments at <a href="mailto:welbydx@gmail.com">welbydx@gmail.com</a>.
-For those who are interested, you can also take a look at the code
-that implements the skill/action on my <a href="https://github.com/glmck13/VitalSigns">github
+For additional details about how the tool is implemented, you can
+check out the software on my <a href="https://github.com/glmck13/VitalSigns">github
 site</a>.</p>
 </body>
 </html>
