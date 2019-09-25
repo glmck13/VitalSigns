@@ -1,0 +1,62 @@
+[
+  {
+    "id": "8832db4d-0781-475d-bfb7-7048ded43e7f",
+    "data": [
+      {
+        "text": "enter vital signs",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d215c090-77cb-451a-8376-207cc6ed7607",
+    "data": [
+      {
+        "text": "save data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8a8c7345-7412-430c-a42f-62244594118c",
+    "data": [
+      {
+        "text": "record data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e7502be3-f2d1-4534-9a87-c8e5afe9ed69",
+    "data": [
+      {
+        "text": "submit data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f956e728-0865-4b93-ab90-c58a1cd5115a",
+    "data": [
+      {
+        "text": "enter data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

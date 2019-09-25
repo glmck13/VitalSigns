@@ -1,0 +1,98 @@
+[
+  {
+    "id": "7a11c33d-4542-4972-a889-11475245cb45",
+    "data": [
+      {
+        "text": "show proxy",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bb982776-258e-45a3-8a5b-45f28cfbe766",
+    "data": [
+      {
+        "text": "show proxies",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e4a3a529-9db0-430c-a34c-ffbe90555bed",
+    "data": [
+      {
+        "text": "delete proxy",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e9b278d9-662a-4501-9d87-822a333382a0",
+    "data": [
+      {
+        "text": "add proxy",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "070bf81b-fdfc-4353-84d6-6c10b511cf5e",
+    "data": [
+      {
+        "text": "update proxy info",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8b19e449-cf94-4064-be8b-c6c935953503",
+    "data": [
+      {
+        "text": "update proxy list",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "262ae7c1-63c9-45c8-a429-477066e370d9",
+    "data": [
+      {
+        "text": "update proxy",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "32c8226f-2050-4038-8ebd-708892100505",
+    "data": [
+      {
+        "text": "update proxies",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

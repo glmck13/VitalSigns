@@ -1,0 +1,131 @@
+{
+  "id": "e8fd38e3-3c60-4a58-ba41-319540470421",
+  "name": "SubmitAnswer",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "405bbc0f-9a6f-4e74-85a2-fcdb9e65498e",
+          "required": false,
+          "dataType": "@sys.number-integer",
+          "name": "number",
+          "value": "$number",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "f0dbd68a-f925-4560-a976-9b43a1dc9a8c",
+          "required": false,
+          "dataType": "@sys.number-integer",
+          "name": "whole",
+          "value": "$whole",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "e38dc9bc-6a7f-4cfb-8bde-1923f1c8e4ca",
+          "required": false,
+          "dataType": "@sys.number-integer",
+          "name": "fraction",
+          "value": "$fraction",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "60344f13-c71b-4dd6-83ef-029878487901",
+          "required": false,
+          "dataType": "@sys.number-integer",
+          "name": "top",
+          "value": "$top",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "a36a3aa1-2df3-45f6-a804-2f88670ab9df",
+          "required": false,
+          "dataType": "@sys.number-integer",
+          "name": "bottom",
+          "value": "$bottom",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "013e2efc-e6a3-4723-8880-2d00a62693bc",
+          "required": false,
+          "dataType": "@sys.given-name",
+          "name": "name",
+          "value": "$name",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "88b61a61-4ae1-43ae-9bcd-4eaf4d1a6e01",
+          "required": false,
+          "dataType": "@BlankSlot",
+          "name": "blank",
+          "value": "$blank",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "e3aeb158-390b-4e2e-9ff2-09bb1652c6e0",
+          "required": false,
+          "dataType": "@Confirmation",
+          "name": "confirmation",
+          "value": "$confirmation",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "625cb9f2-4550-472e-a6c9-af271f4c16f2",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "float",
+          "value": "$float",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": []
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "0abdfdde-4e99-438d-87c3-d2470539594b",
+    "data": [
+      {
+        "text": "erase history",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fb6c54f6-a31c-4d3f-9899-aca1ef2f285e",
+    "data": [
+      {
+        "text": "erase vital signs",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "846e328d-9dce-49af-bda5-615ede859c6c",
+    "data": [
+      {
+        "text": "remove data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f4b733a3-6ed4-4e56-bc24-d3a1123ed4a3",
+    "data": [
+      {
+        "text": "zero out data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "80af087c-5c9a-4eab-bb48-dcf752ec39bf",
+    "data": [
+      {
+        "text": "purge data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "4db652e0-3788-48a6-b95f-e41711122417",
+    "data": [
+      {
+        "text": "delete data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b8f84dc6-5089-4022-bedf-5c12eb746d7e",
+    "data": [
+      {
+        "text": "clear data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ba7604e7-aff5-4669-890d-04e37efb1922",
+    "data": [
+      {
+        "text": "erase data",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]
