@@ -1,0 +1,27 @@
+[
+  {
+    "value": "no",
+    "synonyms": [
+      "incorrect",
+      "later",
+      "nah",
+      "never",
+      "no",
+      "nope",
+      "not now"
+    ]
+  },
+  {
+    "value": "yes",
+    "synonyms": [
+      "absolutely",
+      "always",
+      "correct",
+      "now",
+      "right",
+      "sure",
+      "yeah",
+      "yes"
+    ]
+  }
+]
