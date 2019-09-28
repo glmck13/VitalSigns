@@ -15,6 +15,6 @@ expect >/dev/null <<EOF
 set timeout 120
 spawn alpine "$EMAIL"
 expect "To AddrBk"
-send "\r\r$ATTACH\r$SUBJECT\r$MESSAGE\rY"
+send "$SUBJECT$ATTACH\r\r$MESSAGE\rY"
 expect "Alpine finished"
 EOF
