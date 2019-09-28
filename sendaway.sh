@@ -1,7 +1,7 @@
 #!/bin/ksh
 
 #
-# alpine config: https://github.com/termux/termux-packages/issues/2023
+# alpine config: https://github.com/termux/termux-packages/issues/2023, https://www.ccdw.org/node/14
 # alpine IMAP auth: disable-these-authenticators=PLAIN
 #
 
