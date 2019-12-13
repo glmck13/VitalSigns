@@ -73,7 +73,7 @@ def vital_handler(event, context):
 
         page = requests.get(os.environ.get('ALEXA_URL'), auth=(os.environ.get('ALEXA_USER'), os.environ.get('ALEXA_PASS')), params=query)
         tree = html.fromstring(page.content)
-        speech = html.tostring(tree.xpath('//speak')[0]).decode()
+        speech = html.tostring(tree.xpath('//speak')[0], encoding="unicode")
         subtree = tree.xpath('//body/p')
         try:
             card = subtree[0].xpath('string()')
