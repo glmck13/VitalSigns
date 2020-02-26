@@ -42,24 +42,24 @@ def vital_handler(event, context):
 
         elif intentName in ("AnalyzeData"):
             query['Request'] = intentName
-            if not intent.has_key('slots'):
+            if 'slots' not in intent:
                 query['Answer'] = ""
-            elif intent['slots'].has_key('column') and intent['slots']['column'].has_key('value'):
+            elif 'column' in intent['slots'] and 'value' in intent['slots']['column']:
                     query['Answer'] = intent['slots']['column']['value']
 
         elif intentName in ("SubmitAnswer"):
             query['Request'] = intentName
-            if not intent.has_key('slots'):
+            if 'slots' not in intent:
                 query['Answer'] = ""
-            elif intent['slots'].has_key('blank') and intent['slots']['blank'].has_key('value'):
+            elif 'blank' in intent['slots'] and 'value' in intent['slots']['blank']:
                     query['Answer'] = "blank"
-            elif intent['slots'].has_key('name') and intent['slots']['name'].has_key('value'):
+            elif 'name' in intent['slots'] and 'value' in intent['slots']['name']:
                     query['Answer'] = intent['slots']['name']['value']
-            elif intent['slots'].has_key('number') and intent['slots']['number'].has_key('value'):
+            elif 'number' in intent['slots'] and 'value' in intent['slots']['number']:
                     query['Answer'] = intent['slots']['number']['value']
-            elif intent['slots'].has_key('whole') and intent['slots']['whole'].has_key('value') and intent['slots'].has_key('fraction') and intent['slots']['fraction'].has_key('value'):
+            elif 'whole' in intent['slots'] and 'value' in intent['slots']['whole'] and 'fraction' in intent['slots'] and 'value' in intent['slots']['fraction']:
                     query['Answer'] = intent['slots']['whole']['value'] + "." + intent['slots']['fraction']['value']
-            elif intent['slots'].has_key('top') and intent['slots']['top'].has_key('value') and intent['slots'].has_key('bottom') and intent['slots']['bottom'].has_key('value'):
+            elif 'top' in intent['slots'] and 'value' in intent['slots']['top'] and 'bottom' in intent['slots'] and 'value' in intent['slots']['bottom']:
                     query['Answer'] = intent['slots']['top']['value'] + "/" + intent['slots']['bottom']['value']
 
     if query:
