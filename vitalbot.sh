@@ -70,7 +70,12 @@ umask 077
 CONFIG=~welby/etc
 PROXYEMAIL=$CONFIG/proxy.txt
 TMPFILE=/tmp/$$.txt
-XML_A="<speak><voice name=\"$Voice\">" XML_Z="</voice></speak>"
+if [ "$Voice" ]; then
+XML_A="<speak><voice name=\"$Voice\"><prosody rate=\"fast\">" XML_Z="</prosody></voice></speak>"
+else
+XML_A="<speak>" XML_Z="</speak>"
+fi
+
 LANG=en_US.UTF-8; export LANG #csvkit tools
 
 (( oneMin = 60 ))
